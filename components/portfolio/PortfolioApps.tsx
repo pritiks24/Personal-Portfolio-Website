@@ -166,7 +166,7 @@ function ProjectsApp() {
 function ExperienceApp() {
   return (
     <div>
-      <SectionTitle kicker="Timeline" title="Roles, leadership, impact." />
+      <SectionTitle kicker="Timeline" title="My roles and impact." />
       <div className="relative space-y-4 pl-5 before:absolute before:bottom-4 before:left-1.5 before:top-2 before:w-px before:bg-slate-200 dark:before:bg-slate-800">
         {experienceData.map((item) => (
           <div key={item.role} className="relative app-card rounded-3xl p-4">
@@ -323,14 +323,33 @@ function BasketballApp() {
 function ResumeApp() {
   return (
     <div>
-      <SectionTitle kicker="Resume" title="Clean reader view." />
-      <a href="/resume.pdf" className="mb-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-950 px-4 py-3 text-sm font-bold text-white dark:bg-white dark:text-slate-950">
-        <Download className="h-4 w-4" /> Download PDF
+      <SectionTitle kicker="Resume" title="Check out my resume." />
+      <a
+        href="/resume.pdf"
+        target="_blank"
+        rel="noreferrer"
+        className="mb-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-[var(--phone-accent)] px-4 py-3 text-sm font-bold text-white shadow-lg shadow-teal-500/20 transition hover:-translate-y-0.5"
+      >
+        <ExternalLink className="h-4 w-4" /> Open Resume
       </a>
+      <div className="app-card mb-4 overflow-hidden rounded-3xl">
+        <div className="flex items-center justify-between border-b border-slate-200/80 px-4 py-3 dark:border-slate-700/70">
+          <div>
+            <h4 className="text-sm font-semibold">Resume Preview</h4>
+            <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-300">Scroll inside the document.</p>
+          </div>
+          <Download className="h-4 w-4 text-[var(--phone-accent)]" />
+        </div>
+        <iframe
+          title="Pritika Lahiri resume PDF preview"
+          src="/resume.pdf#toolbar=0&navpanes=0"
+          className="h-[34rem] w-full bg-white"
+        />
+      </div>
       {[
-        ["Education", "B.S. Computer Science / Software Engineering, University Name"],
+        ["Education", "B.S. Computer Science, University of Waterloo"],
         ["Experience", "Internships, TA work, campus leadership, and product-focused projects."],
-        ["Projects", "AI/ML tools, full-stack apps, hackathon builds, and school systems work."],
+        ["Projects", "AI/ML tools, full-stack apps, and hackathon builds"],
         ["Skills", "TypeScript, Python, React, Next.js, databases, APIs, cloud basics."],
       ].map(([heading, body]) => (
         <div key={heading} className="app-card mb-3 rounded-3xl p-4">

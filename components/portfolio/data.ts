@@ -94,21 +94,21 @@ export const projectData = [
 
 export const experienceData = [
   {
-    role: "Software Engineering Intern",
-    org: "Company / Startup Name",
-    date: "Summer 2026",
-    description: "Shipped user-facing features, improved API reliability, and collaborated across product and design.",
+    role: "Software Developer Intern",
+    org: "CGI",
+    date: "2026",
+    description: "Worked with the data engineering team on a TD project and contributed front-end development for an internal application.",
   },
   {
-    role: "CS Teaching Assistant",
-    org: "University Department",
-    date: "2025 - 2026",
-    description: "Supported labs, reviewed assignments, and helped students build stronger debugging instincts.",
+    role: "AI Researcher",
+    org: "UC Berkeley",
+    date: "June 2024 - April 2025",
+    description: "Researched multi-model reasoning systems for mathematical problem solving, exploring how feedback between models can improve step-by-step accuracy on challenging benchmark tasks.",
   },
   {
-    role: "Project Lead",
-    org: "Student Developer Club",
-    date: "2024 - Present",
-    description: "Led weekly builds, scoped features, and mentored students through full-stack project launches.",
+    role: "Teaching Assistant Intern",
+    org: "LIVE by Po-Shen Loh / Carnegie Mellon University",
+    date: "Feb. 2022 - June 2025",
+    description: "Supported interactive math instruction for a large international student community and helped mentor students through scholarship-focused learning programs.",
   },
 ];

@@ -20,7 +20,7 @@ export function PhoneFrame({ children, theme, accent, booted }: PhoneFrameProps)
       className={theme === "dark" ? "dark" : ""}
       style={{ "--phone-accent": accent } as React.CSSProperties}
     >
-      <div className="relative h-[min(88vh,860px)] w-[min(94vw,430px)] min-w-[320px] rounded-[3.4rem] border border-white/35 bg-slate-950 p-2 shadow-[0_36px_120px_rgba(15,23,42,0.42)]">
+      <div className="relative h-[min(92vh,940px)] w-[min(96vw,540px)] min-w-[320px] rounded-[3.7rem] border border-white/35 bg-slate-950 p-2.5 shadow-[0_36px_120px_rgba(15,23,42,0.42)] lg:h-[min(94vh,980px)] lg:w-[min(46vw,590px)]">
         <div className="absolute inset-x-16 top-0 z-30 h-7 rounded-b-3xl bg-slate-950" />
         <div className="relative h-full overflow-hidden rounded-[2.9rem] bg-slate-900">
           <div className="pointer-events-none absolute inset-0 z-20 rounded-[2.9rem] ring-1 ring-inset ring-white/20" />

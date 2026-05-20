@@ -22,16 +22,16 @@ export function AppIcon({ app, onOpen, animations }: AppIconProps) {
       aria-label={`Open ${app.name}`}
     >
       <span
-        className={`relative grid h-15 w-15 place-items-center rounded-[1.35rem] bg-gradient-to-br ${app.gradient} shadow-[0_14px_28px_rgba(15,23,42,0.24)] ring-1 ring-white/35 transition group-focus-visible:ring-4 group-focus-visible:ring-white/80 sm:h-16 sm:w-16`}
+        className={`relative grid h-[4.6rem] w-[4.6rem] place-items-center rounded-[1.55rem] bg-gradient-to-br ${app.gradient} shadow-[0_14px_28px_rgba(15,23,42,0.24)] ring-1 ring-white/35 transition group-focus-visible:ring-4 group-focus-visible:ring-white/80 sm:h-20 sm:w-20`}
       >
-        <Icon className="h-7 w-7 text-white drop-shadow" strokeWidth={2.2} />
+        <Icon className="h-8 w-8 text-white drop-shadow sm:h-9 sm:w-9" strokeWidth={2.2} />
         {app.badge ? (
           <span className="absolute -right-1.5 -top-1.5 grid h-5 min-w-5 place-items-center rounded-full bg-red-500 px-1 text-[0.68rem] font-bold text-white ring-2 ring-white">
             {app.badge}
           </span>
         ) : null}
       </span>
-      <span className="w-full truncate text-[0.72rem] font-medium leading-tight text-white drop-shadow-[0_1px_5px_rgba(15,23,42,0.55)]">
+      <span className="w-full truncate text-[0.76rem] font-semibold leading-tight text-white drop-shadow-[0_1px_5px_rgba(15,23,42,0.55)] sm:text-[0.82rem]">
         {app.name}
       </span>
     </motion.button>
