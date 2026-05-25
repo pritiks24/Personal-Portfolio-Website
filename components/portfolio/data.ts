@@ -12,7 +12,6 @@ import {
   NotebookPen,
   Settings,
   Sparkles,
-  Trophy,
   UserRound,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -24,7 +23,6 @@ export type AppId =
   | "skills"
   | "photos"
   | "music"
-  | "basketball"
   | "resume"
   | "contact"
   | "notes"
@@ -47,7 +45,6 @@ export const apps: PortfolioApp[] = [
   { id: "skills", name: "Skills", icon: Sparkles, gradient: "from-amber-300 via-orange-400 to-rose-400" },
   { id: "photos", name: "Photos", icon: Camera, gradient: "from-rose-400 via-pink-500 to-purple-500" },
   { id: "music", name: "Music", icon: Music2, gradient: "from-lime-300 via-green-400 to-emerald-500" },
-  { id: "basketball", name: "Basketball", icon: Trophy, gradient: "from-orange-400 via-red-500 to-stone-800" },
   { id: "resume", name: "Resume", icon: FileText, gradient: "from-slate-200 via-slate-300 to-slate-500", dock: true },
   { id: "contact", name: "Contact", icon: MessageCircle, gradient: "from-blue-400 via-sky-500 to-cyan-400", badge: 1, dock: true },
   { id: "notes", name: "Notes", icon: NotebookPen, gradient: "from-yellow-200 via-amber-300 to-orange-300" },

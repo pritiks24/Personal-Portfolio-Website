@@ -34,7 +34,6 @@ export function PortfolioApps(props: PortfolioAppsProps) {
     skills: <SkillsApp />,
     photos: <PhotosApp />,
     music: <MusicApp />,
-    basketball: <BasketballApp />,
     resume: <ResumeApp />,
     contact: <ContactApp />,
     notes: <NotesApp />,
@@ -188,9 +187,9 @@ function ExperienceApp() {
 
 function SkillsApp() {
   const groups = [
-    ["Languages", [["TypeScript", 88], ["Python", 86], ["Java", 78], ["C++", 72]]],
+    ["Languages", [["C", 80], ["C++", 75], ["Python", 72], ["Java", 70], ["TypeScript", 68], ["Racket", 65]]],
     ["Frameworks", [["React", 90], ["Next.js", 84], ["Node", 80], ["Tailwind", 88]]],
-    ["Tools", [["Postgres", 76], ["Prisma", 74], ["Git", 86], ["Cloud", 68]]],
+    ["Tools", [["Postgres", 76], ["Git", 86], ["Cloud", 68]]],
   ] as const;
 
   return (
@@ -289,30 +288,6 @@ function MusicApp() {
               <p className="font-semibold">{album}</p>
               <p className="text-xs text-slate-500">Playlist placeholder</p>
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function BasketballApp() {
-  return (
-    <div>
-      <SectionTitle kicker="Court" title="Competitive, calm, coachable." />
-      <div className="overflow-hidden rounded-[2rem] bg-[#c86f35] p-5 text-white shadow-xl">
-        <div className="relative h-36 rounded-[1.5rem] border-2 border-white/55">
-          <div className="absolute left-1/2 top-0 h-full w-px bg-white/45" />
-          <div className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white/45" />
-          <div className="absolute inset-x-6 top-4 h-12 rounded-b-full border-2 border-t-0 border-white/45" />
-          <div className="absolute inset-x-6 bottom-4 h-12 rounded-t-full border-2 border-b-0 border-white/45" />
-        </div>
-      </div>
-      <div className="mt-4 grid grid-cols-2 gap-3">
-        {["Team-first guard", "3v3 captain", "Practice habits", "Leadership"].map((stat) => (
-          <div key={stat} className="app-card rounded-3xl p-4">
-            <p className="text-2xl font-black text-[var(--phone-accent)]">{stat.split(" ")[0]}</p>
-            <p className="mt-1 text-sm font-semibold">{stat}</p>
           </div>
         ))}
       </div>
