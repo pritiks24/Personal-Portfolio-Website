@@ -63,6 +63,8 @@ type GalleryPhoto = {
   title: string;
   caption: string;
   position?: string;
+  fit?: "cover" | "contain";
+  companionSrc?: string;
 };
 
 function AboutApp() {
@@ -231,6 +233,8 @@ function PhotosApp() {
   const [selected, setSelected] = useState<string | null>(null);
   const [activeBasketballPhoto, setActiveBasketballPhoto] = useState(0);
   const [activeMusicPhoto, setActiveMusicPhoto] = useState(0);
+  const [activeTravelPhoto, setActiveTravelPhoto] = useState(0);
+  const [activeProjectPhoto, setActiveProjectPhoto] = useState(0);
   const basketballPhotos: GalleryPhoto[] = [
     {
       src: "/images/basketball/action-layup.jpg",
@@ -269,6 +273,7 @@ function PhotosApp() {
       src: "/images/music/piano-cover.jpg",
       title: "Piano set",
       caption: "Playing piano and singing on stage.",
+      position: "18% center",
     },
     {
       src: "/images/music/family-recital.jpg",
@@ -281,28 +286,163 @@ function PhotosApp() {
       caption: "Another live cover from the recital stage.",
     },
   ];
-  const activeGalleryPhotos = selected === "Music" ? musicPhotos : basketballPhotos;
-  const activeGalleryPhoto = selected === "Music" ? activeMusicPhoto : activeBasketballPhoto;
-  const setActiveGalleryPhoto = selected === "Music" ? setActiveMusicPhoto : setActiveBasketballPhoto;
+  const travelPhotos: GalleryPhoto[] = [
+    {
+      src: "/images/travel/jungfraujoch-flag.jpeg",
+      title: "Jungfraujoch",
+      caption: "Swiss mountain views at the Top of Europe.",
+      position: "center",
+    },
+    {
+      src: "/images/travel/mountain-train.JPG",
+      title: "Mountain rail",
+      caption: "A bright stop between green hills, glaciers, and train tracks.",
+    },
+    {
+      src: "/images/travel/colosseum-night.JPG",
+      title: "Rome at night",
+      caption: "Warm lights and a night walk by the Colosseum.",
+    },
+    {
+      src: "/images/travel/snow-view.jpeg",
+      title: "Snow day",
+      caption: "A playful pause in the snow with a huge mountain view behind us.",
+      position: "center 35%",
+    },
+    {
+      src: "/images/travel/venice-canal.jpeg",
+      title: "Venice canal",
+      caption: "Gondolas, water reflections, and colorful buildings in Venice.",
+    },
+  ];
+  const projectPhotos: GalleryPhoto[] = [
+    {
+      src: "/images/projects/build-table.jpeg",
+      title: "Build table",
+      caption: "A hands-on hardware build session with tools, parts, and a lot of debugging.",
+    },
+    {
+      src: "/images/projects/hack-the-valley.jpeg",
+      title: "Hackathon memories",
+      caption: "Photo strip from Hack the Valley with my team.",
+    },
+    {
+      src: "/images/projects/spur-team.jpeg",
+      title: "SPUR team",
+      caption: "A team photo from a hackathon weekend at the SPUR Innovation Centre.",
+      position: "center top",
+      fit: "contain",
+      companionSrc: "/images/projects/hack-canada-swag.jpg",
+    },
+    {
+      src: "/images/projects/robot-prototype.jpeg",
+      title: "Robot prototype",
+      caption: "Early robot hardware prototype with sensors, wiring, and live testing.",
+    },
+    {
+      src: "/images/projects/finalist-ui.jpg",
+      title: "Finalist UI",
+      caption: "The UI my team designed for our hackathon project, where we were selected as finalists.",
+      position: "center top",
+    },
+  ];
+  const galleryConfig = {
+    Basketball: {
+      photos: basketballPhotos,
+      activePhoto: activeBasketballPhoto,
+      setActivePhoto: setActiveBasketballPhoto,
+    },
+    Music: {
+      photos: musicPhotos,
+      activePhoto: activeMusicPhoto,
+      setActivePhoto: setActiveMusicPhoto,
+    },
+    Travel: {
+      photos: travelPhotos,
+      activePhoto: activeTravelPhoto,
+      setActivePhoto: setActiveTravelPhoto,
+    },
+    Projects: {
+      photos: projectPhotos,
+      activePhoto: activeProjectPhoto,
+      setActivePhoto: setActiveProjectPhoto,
+    },
+  } as const;
+  const activeGallery = selected === "Basketball" || selected === "Music" || selected === "Travel" || selected === "Projects" ? galleryConfig[selected] : null;
+  const activeGalleryPhotos = activeGallery?.photos ?? basketballPhotos;
+  const activeGalleryPhoto = activeGallery?.activePhoto ?? 0;
+  const setActiveGalleryPhoto = activeGallery?.setActivePhoto ?? setActiveBasketballPhoto;
   const photos = [
-    ["Basketball", "from-orange-300 to-red-500"],
-    ["Music", "from-lime-300 to-emerald-500"],
-    ["Travel", "from-cyan-300 to-blue-500"],
-    ["Projects", "from-violet-300 to-indigo-600"],
+    {
+      label: "Basketball",
+      detail: "Team, awards, court moments",
+      count: basketballPhotos.length,
+      preview: basketballPhotos[0].src,
+      color: "bg-[#e85d3f]",
+      panel: "bg-[#331714]/88",
+    },
+    {
+      label: "Music",
+      detail: "Recitals, covers, stage lights",
+      count: musicPhotos.length,
+      preview: musicPhotos[0].src,
+      color: "bg-[#6652e8]",
+      panel: "bg-[#171b4f]/88",
+    },
+    {
+      label: "Travel",
+      detail: "Places and little adventures",
+      count: travelPhotos.length,
+      preview: travelPhotos[0].src,
+      color: "bg-[#2aa9b7]",
+      panel: "bg-[#103f45]/88",
+    },
+    {
+      label: "Projects",
+      detail: "Build nights and demos",
+      count: projectPhotos.length,
+      preview: projectPhotos[0].src,
+      color: "bg-[#5267d9]",
+      panel: "bg-[#111c55]/88",
+    },
   ];
 
   return (
     <div>
-      <SectionTitle kicker="Gallery: Moments and memories" title="Tap a button to see parts of my life outside tech and school." />
-      <div className="grid grid-cols-2 gap-3">
-        {photos.map(([label, gradient]) => (
-          <button key={label} type="button" onClick={() => setSelected(label)} className={`aspect-square rounded-[1.6rem] bg-gradient-to-br ${gradient} p-3 text-left shadow-lg`}>
-            <span className="rounded-full bg-white/28 px-2.5 py-1 text-xs font-bold text-white backdrop-blur">{label}</span>
+      <SectionTitle kicker="Gallery: Moments and memories" title="Click on a section to see parts of my life outside tech and school." />
+      <div className="grid h-[46rem] grid-cols-2 grid-rows-2 gap-4">
+        {photos.map((album) => (
+          <button
+            key={album.label}
+            type="button"
+            onClick={() => setSelected(album.label)}
+            className={`group relative flex h-full flex-col justify-between overflow-hidden rounded-[1.6rem] ${album.color} p-3 text-left text-white shadow-xl shadow-slate-900/12 ring-1 ring-white/30 transition hover:-translate-y-0.5 hover:shadow-2xl`}
+          >
+            <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(15,23,42,0.32),rgba(255,255,255,0.08))]" />
+            <div className="flex items-start justify-between gap-2">
+              <span className="relative h-2.5 w-2.5 rounded-full bg-white shadow-sm" />
+              <span className="relative rounded-full bg-white/24 px-2 py-1 text-[0.65rem] font-bold text-white shadow-sm ring-1 ring-white/30 backdrop-blur-md">
+                {album.count ? `${album.count} photos` : "Soon"}
+              </span>
+            </div>
+            {album.preview ? (
+              <div className="relative my-3 h-48 overflow-hidden rounded-2xl bg-black/20 shadow-inner ring-1 ring-white/25">
+                <img src={album.preview} alt="" className="h-full w-full object-cover opacity-95 transition duration-300 group-hover:scale-105 group-hover:opacity-100" />
+              </div>
+            ) : (
+              <div className="relative my-3 grid h-48 place-items-center rounded-2xl bg-white/16 text-4xl font-black text-white/75 ring-1 ring-white/25 backdrop-blur-md">
+                {album.label.slice(0, 1)}
+              </div>
+            )}
+            <div className={`relative rounded-2xl ${album.panel} p-2.5 backdrop-blur-md ring-1 ring-white/15`}>
+              <p className="text-base font-bold text-white">{album.label}</p>
+              <p className="mt-1 text-xs leading-4 text-white/82">{album.detail}</p>
+            </div>
           </button>
         ))}
       </div>
       <AnimatePresence>
-        {selected === "Basketball" || selected === "Music" ? (
+        {activeGallery ? (
           <motion.div
             className="fixed inset-0 z-50 grid place-items-center bg-black/70 p-5"
             initial={{ opacity: 0 }}
@@ -313,7 +453,7 @@ function PhotosApp() {
               initial={{ y: 24, scale: 0.96 }}
               animate={{ y: 0, scale: 1 }}
               exit={{ y: 24, scale: 0.96 }}
-              className="app-card max-h-[86vh] w-full max-w-[22rem] overflow-hidden rounded-[2rem] bg-white dark:bg-slate-950"
+              className="max-h-[88vh] w-full max-w-[30rem] overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-950"
             >
               <div className="flex items-center justify-between px-4 py-3">
                 <div>
@@ -335,14 +475,35 @@ function PhotosApp() {
                 initial={{ opacity: 0.65, x: 18 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.25 }}
-                className="relative aspect-[4/5] overflow-hidden bg-slate-100 dark:bg-slate-900"
+                className="relative h-[58vh] min-h-[22rem] overflow-hidden bg-slate-100 dark:bg-slate-900"
               >
-                <img
-                  src={activeGalleryPhotos[activeGalleryPhoto].src}
-                  alt={activeGalleryPhotos[activeGalleryPhoto].title}
-                  className="h-full w-full object-cover"
-                  style={{ objectPosition: activeGalleryPhotos[activeGalleryPhoto].position ?? "center" }}
-                />
+                {activeGalleryPhotos[activeGalleryPhoto].companionSrc ? (
+                  <div className="flex h-full flex-col bg-slate-950">
+                    <div className="grid min-h-0 flex-[1.1] place-items-center bg-slate-950">
+                      <img
+                        src={activeGalleryPhotos[activeGalleryPhoto].src}
+                        alt={activeGalleryPhotos[activeGalleryPhoto].title}
+                        className="max-h-full w-full object-contain"
+                        style={{ objectPosition: activeGalleryPhotos[activeGalleryPhoto].position ?? "center" }}
+                      />
+                    </div>
+                    <div className="min-h-0 flex-1 overflow-hidden border-t border-white/10">
+                      <img
+                        src={activeGalleryPhotos[activeGalleryPhoto].companionSrc}
+                        alt=""
+                        className="h-full w-full object-cover"
+                        style={{ objectPosition: "center" }}
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <img
+                    src={activeGalleryPhotos[activeGalleryPhoto].src}
+                    alt={activeGalleryPhotos[activeGalleryPhoto].title}
+                    className={`h-full w-full ${activeGalleryPhotos[activeGalleryPhoto].fit === "contain" ? "object-contain" : "object-cover"}`}
+                    style={{ objectPosition: activeGalleryPhotos[activeGalleryPhoto].position ?? "center" }}
+                  />
+                )}
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent p-4 text-white">
                   <p className="text-sm font-bold">{activeGalleryPhotos[activeGalleryPhoto].title}</p>
                   <p className="mt-1 text-xs leading-5 text-white/78">{activeGalleryPhotos[activeGalleryPhoto].caption}</p>
@@ -364,13 +525,13 @@ function PhotosApp() {
                   <ChevronRight className="h-5 w-5" />
                 </button>
               </motion.div>
-              <div className="phone-scroll flex gap-2 overflow-x-auto px-4 py-3">
+              <div className="phone-scroll flex gap-2 overflow-x-auto px-4 py-4">
                 {activeGalleryPhotos.map((photo, index) => (
                   <button
                     key={photo.src}
                     type="button"
                     onClick={() => setActiveGalleryPhoto(index)}
-                    className={`h-16 w-16 shrink-0 overflow-hidden rounded-2xl ring-2 transition ${
+                    className={`h-20 w-20 shrink-0 overflow-hidden rounded-2xl ring-2 transition ${
                       activeGalleryPhoto === index ? "ring-[var(--phone-accent)]" : "ring-transparent opacity-70"
                     }`}
                     aria-label={`Show ${photo.title}`}
@@ -580,19 +741,70 @@ function ContactApp() {
 
 function NotesApp() {
   const notes = [
-    ["Learning note", "What I learned from building retrieval augmented apps and where evals changed my thinking."],
-    ["Product thought", "Fintech products win when trust, clarity, and tiny moments of delight line up."],
-    ["Debug log", "A reminder that slow, careful reproduction beats guessing almost every time."],
+    {
+      title: "What first year at Waterloo taught me",
+      tag: "Waterloo CS",
+      status: "Draft",
+      body: "Learning how to ask for help early, build real friendships, protect your energy, and remember that everyone is figuring it out more than they look like they are.",
+      color: "bg-yellow-100 text-yellow-950",
+    },
+    {
+      title: "Advice I would give to incoming first years",
+      tag: "First Year",
+      status: "Draft",
+      body: "Go to the events, talk to the person beside you, start assignments earlier than you think, and do not let comparison steal the fun of learning hard things.",
+      color: "bg-emerald-100 text-emerald-950",
+    },
+    {
+      title: "What hackathons taught me",
+      tag: "Hackathons",
+      status: "Notes",
+      body: "The best teams make decisions quickly, scope aggressively, demo the story clearly, and leave room for weird ideas before narrowing into something shippable.",
+      color: "bg-violet-100 text-violet-950",
+    },
+    {
+      title: "Book notes: The Let Them Theory",
+      tag: "Reading",
+      status: "Currently reading",
+      body: "A reminder to stop over-managing other people's reactions and put that energy back into your own choices, standards, and peace.",
+      color: "bg-rose-100 text-rose-950",
+    },
+    {
+      title: "What I learned from TD/CGI co-op",
+      tag: "Co-op",
+      status: "Coming soon",
+      body: "Coming soon.",
+      color: "bg-sky-100 text-sky-950",
+    },
+    {
+      title: "Notes on building creative products",
+      tag: "Product",
+      status: "Coming soon",
+      body: "Coming soon.",
+      color: "bg-orange-100 text-orange-950",
+    },
   ];
 
   return (
     <div>
-      <SectionTitle kicker="Notes" title="Writing and reflections." />
+      <SectionTitle kicker="Notes" title="Things I am learning." />
+      <div className="mb-4 rounded-[1.6rem] bg-slate-950 p-4 text-white shadow-xl">
+        <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/55">Notebook</p>
+        <p className="mt-2 text-sm leading-5 text-white/78">
+          Short reflections from school, hackathons, books, co-op, and the messy middle of becoming a better builder.
+        </p>
+      </div>
       <div className="grid gap-3">
-        {notes.map(([title, body], index) => (
-          <div key={title} className={`rounded-[1.5rem] p-4 shadow-sm ${index === 1 ? "bg-cyan-100 text-cyan-950" : "bg-yellow-100 text-yellow-950"}`}>
-            <p className="font-semibold">{title}</p>
-            <p className="mt-2 text-sm leading-5 opacity-75">{body}</p>
+        {notes.map((note) => (
+          <div key={note.title} className={`rounded-[1.5rem] p-4 shadow-sm ${note.color}`}>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="text-[0.68rem] font-black uppercase tracking-[0.16em] opacity-60">{note.tag}</p>
+                <p className="mt-1 font-semibold leading-5">{note.title}</p>
+              </div>
+              <span className="shrink-0 rounded-full bg-white/60 px-2.5 py-1 text-[0.65rem] font-bold shadow-sm">{note.status}</span>
+            </div>
+            <p className="mt-3 text-sm leading-5 opacity-78">{note.body}</p>
           </div>
         ))}
       </div>

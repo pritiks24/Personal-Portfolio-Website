@@ -97,6 +97,18 @@ export const experienceData = [
     description: "Worked with the data engineering team on a TD project and contributed front-end development for an internal application.",
   },
   {
+    role: "Design Team Researcher",
+    org: "WAT.ai, University of Waterloo",
+    date: "2026 - Present",
+    description: "Contributing to Waterloo's WAT.ai research team on semantic object state tracking, exploring how systems can better understand and reason about changes in object conditions over time.",
+  },
+  {
+    role: "Hackathon Executive",
+    org: "Technova, University of Waterloo",
+    date: "2026",
+    description: "On the Technova Hackathon team and helping plan the University of Waterloo's Hackathon for Women+ in Tech for 2026, with a focus on creating a polished and welcoming participant experience.",
+  },
+  {
     role: "AI Researcher",
     org: "UC Berkeley",
     date: "June 2024 - April 2025",
