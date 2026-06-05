@@ -58,32 +58,42 @@ export const socialLinks = [
 
 export const projectData = [
   {
-    title: "FinSight AI",
-    category: "AI/ML",
-    description: "A personal finance insight assistant that classifies spending, explains trends, and suggests smarter habits.",
-    stack: ["Python", "Next.js", "OpenAI", "Postgres"],
-    links: ["GitHub", "Demo"],
-  },
-  {
-    title: "Campus Connect",
+    title: "BulkBridge",
     category: "Web Dev",
-    description: "A polished student event hub with RSVP flows, club profiles, and notification-ready dashboards.",
-    stack: ["React", "Tailwind", "Firebase"],
-    links: ["GitHub"],
+    description: "A mobile app for coordinating shared Costco trips, splitting bulk grocery purchases, and using an AI pantry assistant to turn existing ingredients into recipe ideas.",
+    stack: ["React Native", "Expo", "Next.js API", "Prisma", "SQLite", "Gemini API"],
+    links: [{ label: "Devpost", href: "https://devpost.com/software/bulkbridge" }],
   },
   {
-    title: "HackRx Triage",
+    title: "AutoVlog",
     category: "Hackathons",
-    description: "Built in 24 hours: an intake workflow that summarizes symptoms and routes cases by urgency.",
-    stack: ["TypeScript", "Prisma", "LLMs"],
-    links: ["Devpost", "Demo"],
+    description: "An autonomous filming robot that follows a user, avoids obstacles, and captures hands-free video, combining hardware prototyping with a web app for AI-assisted editing.",
+    stack: ["Arduino", "ESP32-CAM", "Computer Vision", "Gemini API", "Web App"],
+    links: [{ label: "Devpost", href: "https://devpost.com/software/autovlog" }],
   },
   {
-    title: "Compiler Notes",
-    category: "School",
-    description: "A mini language parser and interpreter with a clean test suite and visual AST explorer.",
-    stack: ["C++", "Parsing", "Algorithms"],
-    links: ["GitHub"],
+    title: "GreenPrompts",
+    category: "AI/ML",
+    description: "A browser extension that shortens overly long AI prompts to reduce token usage, energy demand, and water usage from everyday AI workflows.",
+    stack: ["JavaScript", "Browser Extension", "AI", "JSON", "Sustainability"],
+    links: [{ label: "Devpost", href: "https://devpost.com/software/greenprompts" }],
+  },
+  {
+    title: "BiteWise",
+    category: "AI/ML",
+    description: "A receipt-to-health insights platform that flags allergens, highlights nutrition risks, creates health scores, and supports accessibility features like voice support.",
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "FastAPI", "MongoDB Atlas", "Gemini API"],
+    links: [{ label: "Devpost", href: "https://devpost.com/software/bitewise-6dr7lg" }],
+  },
+  {
+    title: "Lingo Lift",
+    category: "Web Dev",
+    description: "A winning lecture accessibility platform for ELL students with live translation, adaptive summaries, audio translation, voice tutoring, and saved chat history.",
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "Azure Speech", "ElevenLabs", "Gemini", "Supabase", "Auth0"],
+    links: [
+      { label: "Devpost", href: "https://devpost.com/software/lingo-lift" },
+      { label: "Live", href: "https://www.hackthelang.work" },
+    ],
   },
 ];
 

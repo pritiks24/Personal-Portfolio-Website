@@ -95,21 +95,21 @@ function ProjectsApp() {
         {projects.map((project) => {
           const isOpen = expanded === project.title;
           return (
-            <motion.button
+            <motion.article
               layout
               key={project.title}
-              type="button"
-              onClick={() => setExpanded(isOpen ? "" : project.title)}
-              className="app-card rounded-3xl p-4 text-left outline-none transition focus-visible:ring-4 focus-visible:ring-[var(--phone-accent)]/25"
+              className="app-card rounded-3xl p-4 text-left"
             >
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <p className="text-xs font-bold text-[var(--phone-accent)]">{project.category}</p>
-                  <h4 className="mt-1 text-lg font-semibold">{project.title}</h4>
+              <button type="button" onClick={() => setExpanded(isOpen ? "" : project.title)} className="w-full rounded-2xl text-left outline-none transition focus-visible:ring-4 focus-visible:ring-[var(--phone-accent)]/25">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="text-xs font-bold text-[var(--phone-accent)]">{project.category}</p>
+                    <h4 className="mt-1 text-lg font-semibold">{project.title}</h4>
+                  </div>
+                  <ArrowUpRight className="h-5 w-5 text-slate-400" />
                 </div>
-                <ArrowUpRight className="h-5 w-5 text-slate-400" />
-              </div>
-              <p className="mt-2 text-sm leading-5 text-slate-600 dark:text-slate-300">{project.description}</p>
+                <p className="mt-2 text-sm leading-5 text-slate-600 dark:text-slate-300">{project.description}</p>
+              </button>
               <AnimatePresence>
                 {isOpen ? (
                   <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
@@ -120,15 +120,21 @@ function ProjectsApp() {
                     </div>
                     <div className="mt-4 flex gap-2">
                       {project.links.map((link) => (
-                        <span key={link} className="inline-flex items-center gap-1.5 rounded-full bg-slate-900 px-3 py-1.5 text-xs font-bold text-white dark:bg-white dark:text-slate-950">
-                          {link} <ExternalLink className="h-3 w-3" />
-                        </span>
+                        <a
+                          key={link.href}
+                          href={link.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-1.5 rounded-full bg-slate-900 px-3 py-1.5 text-xs font-bold text-white transition hover:-translate-y-0.5 hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200"
+                        >
+                          {link.label} <ExternalLink className="h-3 w-3" />
+                        </a>
                       ))}
                     </div>
                   </motion.div>
                 ) : null}
               </AnimatePresence>
-            </motion.button>
+            </motion.article>
           );
         })}
       </div>
