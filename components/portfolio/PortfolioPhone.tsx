@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, BrainCircuit, Code2, GraduationCap, Sparkles } from "lucide-react";
+import { BrainCircuit, Code2, GraduationCap, Sparkles } from "lucide-react";
 import { AppWindow } from "./AppWindow";
 import { HomeScreen } from "./HomeScreen";
 import { PhoneFrame } from "./PhoneFrame";
@@ -62,14 +62,6 @@ export function PortfolioPhone() {
                 </div>
               );
             })}
-          </div>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a href="mailto:you@example.com" className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-xl shadow-slate-950/15 transition hover:-translate-y-0.5">
-              Contact me <ArrowUpRight className="h-4 w-4" />
-            </a>
-            <a href="https://github.com/your-handle" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-5 py-3 text-sm font-bold text-slate-800 shadow-xl shadow-slate-950/5 backdrop-blur transition hover:-translate-y-0.5">
-              GitHub <ArrowUpRight className="h-4 w-4" />
-            </a>
           </div>
         </section>
         <section className="relative grid place-items-center">
