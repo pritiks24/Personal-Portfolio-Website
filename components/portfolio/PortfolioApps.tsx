@@ -702,26 +702,25 @@ function ContactApp() {
   });
 
   return (
-    <div className="-m-4 min-h-full bg-white pb-6 text-slate-950 dark:bg-slate-950 dark:text-white">
-      <div className="relative overflow-hidden bg-[#ffd8e5] px-4 pb-20 pt-4 text-slate-900 dark:bg-rose-950/60 dark:text-white">
-        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-white dark:to-slate-950" />
-        <div className="relative z-10 flex items-center justify-between">
-          <button type="button" className="inline-flex items-center gap-1 rounded-full bg-white/78 px-3 py-2 text-sm font-bold text-slate-700 shadow-sm ring-1 ring-white/80 backdrop-blur transition hover:bg-white dark:bg-white/10 dark:text-white dark:ring-white/15">
+    <div className="-m-4 min-h-full bg-[#f7f7f8] pb-6 text-slate-950 dark:bg-slate-950 dark:text-white">
+      <div className="bg-[#fde8ee] px-4 pb-16 pt-4 text-slate-900 dark:bg-slate-900 dark:text-white">
+        <div className="flex items-center justify-between">
+          <button type="button" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50 dark:bg-slate-800 dark:text-white dark:ring-slate-700">
             <ChevronLeft className="h-4 w-4" />
             Back
           </button>
-          <button type="button" className="rounded-full bg-white/78 px-4 py-2 text-sm font-bold text-slate-700 shadow-sm ring-1 ring-white/80 backdrop-blur transition hover:bg-white dark:bg-white/10 dark:text-white dark:ring-white/15">
+          <button type="button" className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50 dark:bg-slate-800 dark:text-white dark:ring-slate-700">
             Edit
           </button>
         </div>
       </div>
 
-      <div className="relative z-10 -mt-16 px-4">
+      <div className="-mt-12 px-4">
         <div className="grid place-items-center text-center">
-          <div className="grid h-32 w-32 place-items-center rounded-full bg-white text-5xl font-black text-rose-400 shadow-xl shadow-rose-200/70 ring-4 ring-white dark:bg-slate-900 dark:text-rose-200 dark:shadow-black/20 dark:ring-slate-950">
+          <div className="grid h-28 w-28 place-items-center rounded-full bg-white text-4xl font-semibold text-rose-500 shadow-sm ring-1 ring-slate-200 dark:bg-slate-800 dark:text-rose-200 dark:ring-slate-700">
             PL
           </div>
-          <h3 className="mt-4 text-3xl font-black tracking-tight text-slate-950 dark:text-white">Pritika Lahiri</h3>
+          <h3 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Pritika Lahiri</h3>
           <p className="mt-2 max-w-[20rem] text-sm font-medium leading-5 text-slate-500 dark:text-slate-300">
             Waterloo CS undergrad building software, AI/ML projects, and creative products.
           </p>
@@ -730,17 +729,17 @@ function ContactApp() {
         <div className="mt-5 grid grid-cols-4 gap-3">
           {quickActions.map(({ label, href, Icon }) => (
             <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noreferrer" : undefined} className="grid gap-1 text-center">
-              <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-slate-50 text-rose-500 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:bg-rose-50 hover:shadow-md dark:bg-slate-900 dark:text-rose-200 dark:ring-slate-800">
+              <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-white text-rose-500 shadow-sm ring-1 ring-slate-200 transition hover:bg-rose-50 dark:bg-slate-900 dark:text-rose-200 dark:ring-slate-800">
                 <Icon className="h-5 w-5" />
               </span>
-              <span className="text-[0.62rem] font-bold text-slate-500 dark:text-slate-300">{label.replace(" Email", "")}</span>
+              <span className="text-[0.62rem] font-semibold text-slate-500 dark:text-slate-300">{label.replace(" Email", "")}</span>
             </a>
           ))}
         </div>
 
-        <div className="mt-6 overflow-hidden rounded-[1.6rem] bg-white text-slate-950 shadow-xl shadow-slate-900/8 ring-1 ring-slate-200 dark:bg-slate-900 dark:text-white dark:ring-slate-800">
+        <div className="mt-6 overflow-hidden rounded-[1.4rem] bg-white text-slate-950 shadow-sm ring-1 ring-slate-200 dark:bg-slate-900 dark:text-white dark:ring-slate-800">
           <div className="border-b border-slate-200 px-4 py-3 dark:border-slate-800">
-            <p className="text-xs font-black uppercase tracking-[0.18em] text-rose-400">Info</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-rose-500">Info</p>
           </div>
           {contactRows.map((row, index) => (
             <a
@@ -748,7 +747,7 @@ function ContactApp() {
               href={row.href}
               target={row.href.startsWith("http") ? "_blank" : undefined}
               rel={row.href.startsWith("http") ? "noreferrer" : undefined}
-              className={`flex items-start justify-between gap-4 px-4 py-3 transition hover:bg-rose-50/70 dark:hover:bg-slate-800/70 ${index !== contactRows.length - 1 ? "border-b border-slate-200 dark:border-slate-800" : ""}`}
+              className={`flex items-start justify-between gap-4 px-4 py-3 transition hover:bg-rose-50 dark:hover:bg-slate-800/70 ${index !== contactRows.length - 1 ? "border-b border-slate-200 dark:border-slate-800" : ""}`}
             >
               <div>
                 <p className="text-sm text-slate-500 dark:text-slate-400">{row.label}</p>
@@ -759,9 +758,9 @@ function ContactApp() {
           ))}
         </div>
 
-        <div className="mt-4 overflow-hidden rounded-[1.6rem] bg-white text-slate-950 shadow-xl shadow-slate-900/8 ring-1 ring-slate-200 dark:bg-slate-900 dark:text-white dark:ring-slate-800">
+        <div className="mt-4 overflow-hidden rounded-[1.4rem] bg-white text-slate-950 shadow-sm ring-1 ring-slate-200 dark:bg-slate-900 dark:text-white dark:ring-slate-800">
           <div className="border-b border-slate-200 px-4 py-3 dark:border-slate-800">
-            <p className="text-xs font-black uppercase tracking-[0.18em] text-rose-400">Actions</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-rose-500">Actions</p>
           </div>
           {[
             "Open to internships, co-op roles, and project collaborations",
