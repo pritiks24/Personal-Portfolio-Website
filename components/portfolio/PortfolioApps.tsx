@@ -704,11 +704,7 @@ function ContactApp() {
   return (
     <div className="-m-4 min-h-full bg-[#f7f7f8] pb-6 text-slate-950 dark:bg-slate-950 dark:text-white">
       <div className="bg-[#fde8ee] px-4 pb-16 pt-4 text-slate-900 dark:bg-slate-900 dark:text-white">
-        <div className="flex items-center justify-between">
-          <button type="button" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50 dark:bg-slate-800 dark:text-white dark:ring-slate-700">
-            <ChevronLeft className="h-4 w-4" />
-            Back
-          </button>
+        <div className="flex items-center justify-end">
           <button type="button" className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50 dark:bg-slate-800 dark:text-white dark:ring-slate-700">
             Edit
           </button>
