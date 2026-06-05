@@ -7,7 +7,6 @@ import {
   GitFork,
   GraduationCap,
   Mail,
-  MessageCircle,
   Music2,
   NotebookPen,
   Settings,
@@ -17,7 +16,6 @@ import {
 import type { LucideIcon } from "lucide-react";
 
 export type AppId =
-  | "about"
   | "projects"
   | "experience"
   | "skills"
@@ -39,23 +37,23 @@ export type PortfolioApp = {
 };
 
 export const apps: PortfolioApp[] = [
-  { id: "about", name: "About Me", icon: UserRound, gradient: "from-sky-400 via-cyan-400 to-teal-400", dock: true },
+  { id: "contact", name: "Contact Me", icon: UserRound, gradient: "from-rose-200 via-pink-300 to-stone-400", badge: 1, dock: true },
   { id: "projects", name: "Projects", icon: Code2, gradient: "from-indigo-500 via-violet-500 to-fuchsia-500", badge: 4, dock: true },
   { id: "experience", name: "Experience", icon: BriefcaseBusiness, gradient: "from-emerald-400 via-teal-500 to-cyan-600" },
   { id: "skills", name: "Skills", icon: Sparkles, gradient: "from-amber-300 via-orange-400 to-rose-400" },
   { id: "photos", name: "Photos", icon: Camera, gradient: "from-rose-400 via-pink-500 to-purple-500" },
   { id: "music", name: "Music", icon: Music2, gradient: "from-lime-300 via-green-400 to-emerald-500" },
   { id: "resume", name: "Resume", icon: FileText, gradient: "from-slate-200 via-slate-300 to-slate-500", dock: true },
-  { id: "contact", name: "Contact", icon: MessageCircle, gradient: "from-blue-400 via-sky-500 to-cyan-400", badge: 1, dock: true },
   { id: "notes", name: "Notes", icon: NotebookPen, gradient: "from-yellow-200 via-amber-300 to-orange-300" },
   { id: "achievements", name: "Awards", icon: Award, gradient: "from-purple-400 via-indigo-500 to-blue-500" },
   { id: "settings", name: "Settings", icon: Settings, gradient: "from-zinc-400 via-slate-500 to-zinc-700" },
 ];
 
 export const socialLinks = [
-  { label: "Email", href: "mailto:you@example.com", icon: Mail },
-  { label: "LinkedIn", href: "https://linkedin.com/in/your-handle", icon: GraduationCap },
-  { label: "GitHub", href: "https://github.com/your-handle", icon: GitFork },
+  { label: "Contact Email", href: "mailto:pritika2404@gmail.com", icon: Mail },
+  { label: "Waterloo Email", href: "mailto:plahiri@uwaterloo.ca", icon: Mail },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/pritika-lahiri/", icon: GraduationCap },
+  { label: "GitHub", href: "https://github.com/pritiks24", icon: GitFork },
 ];
 
 export const projectData = [
