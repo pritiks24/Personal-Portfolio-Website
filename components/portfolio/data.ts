@@ -46,7 +46,7 @@ export const apps: PortfolioApp[] = [
   { id: "resume", name: "Resume", icon: FileText, gradient: "from-slate-200 via-slate-300 to-slate-500", dock: true },
   { id: "notes", name: "Notes", icon: NotebookPen, gradient: "from-yellow-200 via-amber-300 to-orange-300" },
   { id: "achievements", name: "Awards", icon: Award, gradient: "from-purple-400 via-indigo-500 to-blue-500" },
-  { id: "settings", name: "Settings", icon: Settings, gradient: "from-zinc-400 via-slate-500 to-zinc-700" },
+  { id: "settings", name: "Settings", icon: Settings, gradient: "from-zinc-400 via-slate-500 to-zinc-700", dock: true },
 ];
 
 export const socialLinks = [
