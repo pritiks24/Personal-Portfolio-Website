@@ -71,7 +71,7 @@ type GalleryPhoto = {
 function ProjectsApp() {
   const [filter, setFilter] = useState("All");
   const [expanded, setExpanded] = useState(projectData[0].title);
-  const filters = ["All", "AI/ML", "Web Dev", "Hackathons", "School"];
+  const filters = ["All", "Hardware Projects", "Browser Extensions", "Web Dev", "Mobile Apps"];
   const projects = filter === "All" ? projectData : projectData.filter((project) => project.category === filter);
 
   return (
@@ -125,7 +125,7 @@ function ProjectsApp() {
                           href={link.href}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-1.5 rounded-full bg-slate-900 px-3 py-1.5 text-xs font-bold text-white transition hover:-translate-y-0.5 hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200"
+                          className="inline-flex items-center gap-1.5 rounded-full bg-[var(--phone-accent)] px-3 py-1.5 text-xs font-bold text-white shadow-lg shadow-[var(--phone-accent)]/20 transition hover:-translate-y-0.5 hover:brightness-95"
                         >
                           {link.label} <ExternalLink className="h-3 w-3" />
                         </a>

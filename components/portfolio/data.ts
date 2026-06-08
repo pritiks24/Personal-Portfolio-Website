@@ -59,28 +59,28 @@ export const socialLinks = [
 export const projectData = [
   {
     title: "BulkBridge",
-    category: "Web Dev",
+    category: "Mobile Apps",
     description: "A mobile app for coordinating shared Costco trips, splitting bulk grocery purchases, and using an AI pantry assistant to turn existing ingredients into recipe ideas.",
     stack: ["React Native", "Expo", "Next.js API", "Prisma", "SQLite", "Gemini API"],
     links: [{ label: "Devpost", href: "https://devpost.com/software/bulkbridge" }],
   },
   {
     title: "AutoVlog",
-    category: "Hackathons",
+    category: "Hardware Projects",
     description: "An autonomous filming robot that follows a user, avoids obstacles, and captures hands-free video, combining hardware prototyping with a web app for AI-assisted editing.",
     stack: ["Arduino", "ESP32-CAM", "Computer Vision", "Gemini API", "Web App"],
     links: [{ label: "Devpost", href: "https://devpost.com/software/autovlog" }],
   },
   {
     title: "GreenPrompts",
-    category: "AI/ML",
+    category: "Browser Extensions",
     description: "A browser extension that shortens overly long AI prompts to reduce token usage, energy demand, and water usage from everyday AI workflows.",
     stack: ["JavaScript", "Browser Extension", "AI", "JSON", "Sustainability"],
     links: [{ label: "Devpost", href: "https://devpost.com/software/greenprompts" }],
   },
   {
     title: "BiteWise",
-    category: "AI/ML",
+    category: "Web Dev",
     description: "A receipt-to-health insights platform that flags allergens, highlights nutrition risks, creates health scores, and supports accessibility features like voice support.",
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "FastAPI", "MongoDB Atlas", "Gemini API"],
     links: [{ label: "Devpost", href: "https://devpost.com/software/bitewise-6dr7lg" }],
