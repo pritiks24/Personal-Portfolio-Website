@@ -37,8 +37,8 @@ export type PortfolioApp = {
 };
 
 export const apps: PortfolioApp[] = [
-  { id: "contact", name: "Contact Me", icon: UserRound, gradient: "from-rose-200 via-pink-300 to-stone-400", badge: 1, dock: true },
-  { id: "projects", name: "Projects", icon: Code2, gradient: "from-indigo-500 via-violet-500 to-fuchsia-500", badge: 4, dock: true },
+  { id: "contact", name: "Contact Me", icon: UserRound, gradient: "from-rose-200 via-pink-300 to-stone-400", dock: true },
+  { id: "projects", name: "Projects", icon: Code2, gradient: "from-teal-600 via-teal-600 to-teal-600", dock: true },
   { id: "experience", name: "Experience", icon: BriefcaseBusiness, gradient: "from-emerald-400 via-teal-500 to-cyan-600" },
   { id: "skills", name: "Skills", icon: Sparkles, gradient: "from-amber-300 via-orange-400 to-rose-400" },
   { id: "photos", name: "Photos", icon: Camera, gradient: "from-rose-400 via-pink-500 to-purple-500" },
