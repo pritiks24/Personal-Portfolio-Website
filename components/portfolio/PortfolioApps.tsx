@@ -249,6 +249,7 @@ function PhotosApp() {
       src: "/images/music/family-recital.jpg",
       title: "After the show",
       caption: "A post-performance moment with family.",
+      position: "46% center",
     },
     {
       src: "/images/music/stage-cover.jpg",
