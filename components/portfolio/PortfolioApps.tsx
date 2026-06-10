@@ -1060,7 +1060,7 @@ function SettingsApp({ theme, setTheme, accent, setAccent, animations, setAnimat
       </div>
       <div className="app-card mt-4 rounded-3xl p-4 text-sm leading-6 text-slate-600 dark:text-slate-300">
         <p className="flex items-center gap-2 font-semibold text-slate-950 dark:text-white"><CalendarDays className="h-4 w-4" /> System info</p>
-        <p className="mt-2">React, Tailwind CSS, Framer Motion, lucide-react. Replace placeholder copy in the portfolio data files as your story evolves.</p>
+        <p className="mt-2">React, Tailwind CSS, Framer Motion, lucide-react.</p>
         <p className="mt-2 flex items-center gap-2"><MapPin className="h-4 w-4" /> Built for recruiters, teammates, and curious builders.</p>
       </div>
     </div>
