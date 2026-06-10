@@ -11,7 +11,6 @@ import {
   ExternalLink,
   Folder,
   MapPin,
-  MoreHorizontal,
   Play,
   Trophy,
 } from "lucide-react";
@@ -852,7 +851,7 @@ function NotesApp() {
   if (selectedNote) {
     return (
       <div className="-m-4 min-h-full bg-[#f7f7f9] px-4 pb-5 pt-4 text-slate-950 dark:bg-slate-950 dark:text-white">
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-6 flex items-center">
           <button
             type="button"
             onClick={() => setOpenNote(null)}
@@ -860,9 +859,6 @@ function NotesApp() {
             aria-label="Back to all notes"
           >
             <ChevronLeft className="h-5 w-5" />
-          </button>
-          <button type="button" className="grid h-9 w-9 place-items-center rounded-full bg-white text-amber-600 shadow-sm ring-1 ring-slate-200 dark:bg-white dark:text-slate-950 dark:ring-white/20">
-            <MoreHorizontal className="h-5 w-5" />
           </button>
         </div>
 
@@ -880,13 +876,6 @@ function NotesApp() {
 
   return (
     <div className="-m-4 min-h-full bg-[#f7f7f9] px-4 pb-5 pt-4 text-slate-950 dark:bg-slate-950 dark:text-white">
-      <div className="mb-5 flex items-center justify-between">
-        <div />
-        <button type="button" className="grid h-9 w-9 place-items-center rounded-full bg-white text-amber-500 shadow-sm dark:bg-slate-900">
-          <MoreHorizontal className="h-5 w-5" />
-        </button>
-      </div>
-
       <div className="mb-3">
         <h3 className="text-4xl font-black tracking-tight">Notes</h3>
         <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">6 Notes</p>
