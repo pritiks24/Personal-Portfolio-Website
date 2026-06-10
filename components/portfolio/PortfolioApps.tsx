@@ -856,18 +856,18 @@ function NotesApp() {
           <button
             type="button"
             onClick={() => setOpenNote(null)}
-            className="grid h-9 w-9 place-items-center rounded-full bg-white text-amber-500 shadow-sm dark:bg-slate-900"
+            className="grid h-9 w-9 place-items-center rounded-full bg-white text-amber-600 shadow-sm ring-1 ring-slate-200 dark:bg-white dark:text-slate-950 dark:ring-white/20"
             aria-label="Back to all notes"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
-          <button type="button" className="grid h-9 w-9 place-items-center rounded-full bg-white text-amber-500 shadow-sm dark:bg-slate-900">
+          <button type="button" className="grid h-9 w-9 place-items-center rounded-full bg-white text-amber-600 shadow-sm ring-1 ring-slate-200 dark:bg-white dark:text-slate-950 dark:ring-white/20">
             <MoreHorizontal className="h-5 w-5" />
           </button>
         </div>
 
-        <article className="min-h-[36rem] rounded-[1.6rem] bg-white px-4 py-5 shadow-sm dark:bg-slate-900">
-          <p className="text-xs font-semibold text-slate-400">{selectedNote.time} • {selectedNote.folder}</p>
+        <article className="min-h-[36rem] rounded-[1.6rem] bg-white px-4 py-5 shadow-sm dark:bg-slate-900 dark:ring-1 dark:ring-slate-800">
+          <p className="text-xs font-semibold text-slate-400 dark:text-amber-200/80">{selectedNote.time} • {selectedNote.folder}</p>
           <h3 className="mt-3 text-2xl font-black leading-8 tracking-tight">{selectedNote.title}</h3>
           <div className="mt-5 whitespace-pre-line text-[0.98rem] leading-7 text-slate-700 dark:text-slate-200">
             {selectedNote.content}
@@ -999,11 +999,11 @@ function AchievementsApp() {
       <SectionTitle kicker="Awards" title="Math, music, and competition milestones." />
       <div className="grid gap-3">
         {wins.map((win) => (
-          <div key={win.title} className="app-card flex items-start gap-3 rounded-3xl p-4">
-            <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-amber-100 text-amber-700"><Trophy className="h-6 w-6" /></div>
+          <div key={win.title} className="app-card flex items-start gap-3 rounded-3xl p-4 dark:border dark:border-amber-300/15 dark:bg-slate-900">
+            <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-amber-100 text-amber-700 dark:bg-amber-300/18 dark:text-amber-200"><Trophy className="h-6 w-6" /></div>
             <div>
-              <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-amber-700">{win.category}</span>
-              <p className="mt-2 font-semibold leading-5">{win.title}</p>
+              <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-amber-700 dark:bg-amber-300/15 dark:text-amber-200">{win.category}</span>
+              <p className="mt-2 font-semibold leading-5 dark:text-white">{win.title}</p>
               <p className="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-300">{win.detail}</p>
             </div>
           </div>
