@@ -36,7 +36,7 @@ export function HomeScreen({ onOpen, animations }: HomeScreenProps) {
             hidden: {},
             show: { transition: { staggerChildren: 0.035, delayChildren: 0.14 } },
           }}
-          className="relative z-10 grid grid-cols-4 gap-x-4 gap-y-7 sm:gap-x-5 sm:gap-y-8"
+          className="relative z-10 grid grid-cols-4 gap-x-4 gap-y-6 sm:gap-x-5 sm:gap-y-7"
         >
           {homeApps.map((app) => (
             <motion.div
@@ -52,8 +52,8 @@ export function HomeScreen({ onOpen, animations }: HomeScreenProps) {
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute inset-x-5 bottom-5 z-10 rounded-[2.2rem] bg-white/22 p-3.5 shadow-[0_14px_45px_rgba(15,23,42,0.24)] backdrop-blur-2xl ring-1 ring-white/25 sm:inset-x-6">
-        <div className="grid grid-cols-4 gap-3.5">
+      <div className="absolute inset-x-5 bottom-5 z-10 rounded-[2.2rem] bg-white/22 p-3 shadow-[0_14px_45px_rgba(15,23,42,0.24)] backdrop-blur-2xl ring-1 ring-white/25 sm:inset-x-6">
+        <div className="grid grid-cols-4 gap-3">
           {dockApps.map((app) => (
             <AppIcon key={app.id} app={app} onOpen={onOpen} animations={animations} />
           ))}

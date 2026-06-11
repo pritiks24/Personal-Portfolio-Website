@@ -22,9 +22,9 @@ export function AppIcon({ app, onOpen, animations }: AppIconProps) {
       aria-label={`Open ${app.name}`}
     >
       <span
-        className={`relative grid h-[4.6rem] w-[4.6rem] place-items-center rounded-[1.55rem] bg-gradient-to-br ${app.gradient} shadow-[0_14px_28px_rgba(15,23,42,0.24)] ring-1 ring-white/35 transition group-focus-visible:ring-4 group-focus-visible:ring-white/80 sm:h-20 sm:w-20`}
+        className={`relative grid h-[4.15rem] w-[4.15rem] place-items-center rounded-[1.38rem] bg-gradient-to-br ${app.gradient} shadow-[0_12px_24px_rgba(15,23,42,0.22)] ring-1 ring-white/35 transition group-focus-visible:ring-4 group-focus-visible:ring-white/80 sm:h-[4.55rem] sm:w-[4.55rem]`}
       >
-        <Icon className="h-8 w-8 text-white drop-shadow sm:h-9 sm:w-9" strokeWidth={2.2} />
+        <Icon className="h-7 w-7 text-white drop-shadow sm:h-8 sm:w-8" strokeWidth={2.2} />
         {app.badge ? (
           <span className="absolute -right-1.5 -top-1.5 grid h-5 min-w-5 place-items-center rounded-full bg-red-500 px-1 text-[0.68rem] font-bold text-white ring-2 ring-white">
             {app.badge}
