@@ -855,7 +855,7 @@ function NotesApp() {
           <button
             type="button"
             onClick={() => setOpenNote(null)}
-            className="grid h-9 w-9 place-items-center rounded-full bg-white text-amber-600 shadow-sm ring-1 ring-slate-200 dark:bg-white dark:text-slate-950 dark:ring-white/20"
+            className="grid h-9 w-9 place-items-center rounded-full bg-white text-amber-600 shadow-sm ring-1 ring-slate-200 dark:bg-slate-800 dark:text-white dark:ring-white/20"
             aria-label="Back to all notes"
           >
             <ChevronLeft className="h-5 w-5" />
