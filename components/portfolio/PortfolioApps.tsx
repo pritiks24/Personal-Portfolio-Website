@@ -858,7 +858,9 @@ function NotesApp() {
             className="grid h-9 w-9 place-items-center rounded-full bg-white text-amber-600 shadow-sm ring-1 ring-slate-200 dark:bg-slate-800 dark:text-white dark:ring-white/20"
             aria-label="Back to all notes"
           >
-            <ChevronLeft className="h-5 w-5" />
+            <span className="text-2xl font-semibold leading-none text-amber-600 dark:text-white" aria-hidden="true">
+              ‹
+            </span>
           </button>
         </div>
 
