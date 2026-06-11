@@ -684,12 +684,12 @@ function ContactApp() {
     {
       label: "contact email",
       value: "pritika2404@gmail.com",
-      href: "mailto:pritika2404@gmail.com",
+      href: "mailto:pritika2404@gmail.com?subject=Portfolio%20Inquiry",
     },
     {
       label: "waterloo email",
       value: "plahiri@uwaterloo.ca",
-      href: "mailto:plahiri@uwaterloo.ca",
+      href: "mailto:plahiri@uwaterloo.ca?subject=Portfolio%20Inquiry",
     },
     {
       label: "linkedin",

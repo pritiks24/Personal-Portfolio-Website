@@ -50,8 +50,8 @@ export const apps: PortfolioApp[] = [
 ];
 
 export const socialLinks = [
-  { label: "Contact Email", href: "mailto:pritika2404@gmail.com", icon: Mail },
-  { label: "Waterloo Email", href: "mailto:plahiri@uwaterloo.ca", icon: Mail },
+  { label: "Contact Email", href: "mailto:pritika2404@gmail.com?subject=Portfolio%20Inquiry", icon: Mail },
+  { label: "Waterloo Email", href: "mailto:plahiri@uwaterloo.ca?subject=Portfolio%20Inquiry", icon: Mail },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/pritika-lahiri/", icon: GraduationCap },
   { label: "GitHub", href: "https://github.com/pritiks24", icon: GitFork },
 ];
