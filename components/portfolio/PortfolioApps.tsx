@@ -1019,8 +1019,9 @@ function SettingsApp({ theme, setTheme, accent, setAccent, animations, setAnimat
                 key={mode}
                 type="button"
                 onClick={() => setTheme(mode)}
-                style={theme === mode ? { color: "#0f172a" } : undefined}
-                className={`rounded-full px-3 py-1.5 text-xs font-bold capitalize ${theme === mode ? "bg-white shadow" : "text-slate-500"}`}
+                className={`rounded-full px-3 py-1.5 text-xs font-bold capitalize ${
+                  theme === mode ? "bg-white text-slate-950 shadow dark:bg-slate-700 dark:text-white" : "text-slate-500 dark:text-slate-300"
+                }`}
               >
                 {mode}
               </button>
