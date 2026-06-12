@@ -423,7 +423,7 @@ function PhotosApp() {
               initial={{ y: 24, scale: 0.96 }}
               animate={{ y: 0, scale: 1 }}
               exit={{ y: 24, scale: 0.96 }}
-              className="max-h-[calc(100%-0.75rem)] w-full max-w-[28rem] overflow-hidden rounded-[1.7rem] border border-slate-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-950"
+              className="flex max-h-[calc(100%-0.75rem)] w-full max-w-[28rem] flex-col overflow-hidden rounded-[1.7rem] border border-slate-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-950"
             >
               <div className="flex items-center justify-between px-4 py-2.5">
                 <div>
@@ -445,7 +445,7 @@ function PhotosApp() {
                 initial={{ opacity: 0.65, x: 18 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.25 }}
-                className="relative h-[min(42svh,22rem)] min-h-[14rem] overflow-hidden bg-slate-100 dark:bg-slate-900"
+                className="relative h-[min(42svh,22rem)] min-h-[14rem] overflow-hidden bg-slate-950"
               >
                 {activeGalleryPhotos[activeGalleryPhoto].companionSrc ? (
                   <div className="flex h-full flex-col bg-slate-950">
@@ -470,7 +470,7 @@ function PhotosApp() {
                   <img
                     src={activeGalleryPhotos[activeGalleryPhoto].src}
                     alt={activeGalleryPhotos[activeGalleryPhoto].title}
-                    className={`h-full w-full ${activeGalleryPhotos[activeGalleryPhoto].fit === "contain" ? "object-contain" : "object-cover"}`}
+                    className="h-full w-full object-contain"
                     style={{ objectPosition: activeGalleryPhotos[activeGalleryPhoto].position ?? "center" }}
                   />
                 )}
