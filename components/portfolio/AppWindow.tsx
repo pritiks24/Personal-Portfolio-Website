@@ -66,7 +66,7 @@ export function AppWindow({ app, children, onClose, onBack, animations, theme }:
               </button>
             </div>
           </header>
-          <main className="phone-scroll h-[calc(100%-4rem)] overflow-y-auto px-4 pb-7 pt-4">{children}</main>
+          <main className="phone-scroll relative box-border h-[calc(100%-4rem)] overflow-y-auto px-4 pb-7 pt-4">{children}</main>
         </motion.div>
       ) : null}
     </AnimatePresence>

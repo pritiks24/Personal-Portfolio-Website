@@ -378,15 +378,15 @@ function PhotosApp() {
   ];
 
   return (
-    <div>
+    <div className="flex h-[calc(100%-2.75rem)] min-h-0 flex-col">
       <SectionTitle kicker="Gallery: Moments and memories" title="Click on a section to see parts of my life outside tech and school." />
-      <div className="grid h-[46rem] grid-cols-2 grid-rows-2 gap-4">
+      <div className="grid min-h-0 flex-1 grid-cols-2 grid-rows-2 gap-3 md:gap-4">
         {photos.map((album) => (
           <button
             key={album.label}
             type="button"
             onClick={() => setSelected(album.label)}
-            className={`group relative flex h-full flex-col justify-between overflow-hidden rounded-[1.6rem] ${album.color} p-3 text-left text-white shadow-xl shadow-slate-900/12 ring-1 ring-white/30 transition hover:-translate-y-0.5 hover:shadow-2xl`}
+            className={`group relative flex h-full min-h-0 flex-col justify-between overflow-hidden rounded-[1.45rem] ${album.color} p-2.5 text-left text-white shadow-xl shadow-slate-900/12 ring-1 ring-white/30 transition hover:-translate-y-0.5 hover:shadow-2xl md:rounded-[1.6rem] md:p-3`}
           >
             <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(15,23,42,0.32),rgba(255,255,255,0.08))]" />
             <div className="flex items-start justify-between gap-2">
@@ -396,17 +396,17 @@ function PhotosApp() {
               </span>
             </div>
             {album.preview ? (
-              <div className="relative my-3 h-48 overflow-hidden rounded-2xl bg-black/20 shadow-inner ring-1 ring-white/25">
+              <div className="relative my-2 min-h-0 flex-1 overflow-hidden rounded-2xl bg-black/20 shadow-inner ring-1 ring-white/25 md:my-3">
                 <img src={album.preview} alt="" className="h-full w-full object-cover opacity-95 transition duration-300 group-hover:scale-105 group-hover:opacity-100" />
               </div>
             ) : (
-              <div className="relative my-3 grid h-48 place-items-center rounded-2xl bg-white/16 text-4xl font-black text-white/75 ring-1 ring-white/25 backdrop-blur-md">
+              <div className="relative my-2 grid min-h-0 flex-1 place-items-center rounded-2xl bg-white/16 text-4xl font-black text-white/75 ring-1 ring-white/25 backdrop-blur-md md:my-3">
                 {album.label.slice(0, 1)}
               </div>
             )}
-            <div className={`relative rounded-2xl ${album.panel} p-2.5 backdrop-blur-md ring-1 ring-white/15`}>
-              <p className="text-base font-bold text-white">{album.label}</p>
-              <p className="mt-1 text-xs leading-4 text-white/82">{album.detail}</p>
+            <div className={`relative rounded-2xl ${album.panel} p-2 backdrop-blur-md ring-1 ring-white/15 md:p-2.5`}>
+              <p className="text-sm font-bold text-white md:text-base">{album.label}</p>
+              <p className="mt-0.5 text-[0.68rem] leading-4 text-white/82 md:mt-1 md:text-xs">{album.detail}</p>
             </div>
           </button>
         ))}
@@ -414,7 +414,7 @@ function PhotosApp() {
       <AnimatePresence>
         {activeGallery ? (
           <motion.div
-            className="fixed inset-0 z-50 grid place-items-center bg-black/70 p-5"
+            className="absolute inset-0 z-50 grid place-items-center bg-black/70 p-3"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -423,9 +423,9 @@ function PhotosApp() {
               initial={{ y: 24, scale: 0.96 }}
               animate={{ y: 0, scale: 1 }}
               exit={{ y: 24, scale: 0.96 }}
-              className="max-h-[88vh] w-full max-w-[30rem] overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-950"
+              className="max-h-[calc(100%-0.75rem)] w-full max-w-[28rem] overflow-hidden rounded-[1.7rem] border border-slate-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-950"
             >
-              <div className="flex items-center justify-between px-4 py-3">
+              <div className="flex items-center justify-between px-4 py-2.5">
                 <div>
                   <h4 className="font-semibold">{selected}</h4>
                   <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-300">
@@ -445,7 +445,7 @@ function PhotosApp() {
                 initial={{ opacity: 0.65, x: 18 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.25 }}
-                className="relative h-[58vh] min-h-[22rem] overflow-hidden bg-slate-100 dark:bg-slate-900"
+                className="relative h-[min(42svh,22rem)] min-h-[14rem] overflow-hidden bg-slate-100 dark:bg-slate-900"
               >
                 {activeGalleryPhotos[activeGalleryPhoto].companionSrc ? (
                   <div className="flex h-full flex-col bg-slate-950">
@@ -495,13 +495,13 @@ function PhotosApp() {
                   <ChevronRight className="h-5 w-5" />
                 </button>
               </motion.div>
-              <div className="phone-scroll flex gap-2 overflow-x-auto px-4 py-4">
+              <div className="phone-scroll flex gap-2 overflow-x-auto px-4 py-3">
                 {activeGalleryPhotos.map((photo, index) => (
                   <button
                     key={photo.src}
                     type="button"
                     onClick={() => setActiveGalleryPhoto(index)}
-                    className={`h-20 w-20 shrink-0 overflow-hidden rounded-2xl ring-2 transition ${
+                    className={`h-16 w-16 shrink-0 overflow-hidden rounded-2xl ring-2 transition md:h-20 md:w-20 ${
                       activeGalleryPhoto === index ? "ring-[var(--phone-accent)]" : "ring-transparent opacity-70"
                     }`}
                     aria-label={`Show ${photo.title}`}
@@ -516,7 +516,7 @@ function PhotosApp() {
           <motion.button
             type="button"
             onClick={() => setSelected(null)}
-            className="fixed inset-0 z-50 grid place-items-center bg-black/70 p-8"
+            className="absolute inset-0 z-50 grid place-items-center bg-black/70 p-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
