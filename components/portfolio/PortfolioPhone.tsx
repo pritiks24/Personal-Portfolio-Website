@@ -35,12 +35,12 @@ export function PortfolioPhone() {
   }, []);
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(20,184,166,0.22),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(99,102,241,0.2),transparent_32%),linear-gradient(135deg,#f8fafc,#e2e8f0)] px-4 py-6 dark:bg-[linear-gradient(135deg,#020617,#111827)] sm:px-6 lg:px-10">
+    <main className="relative min-h-svh overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(20,184,166,0.22),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(99,102,241,0.2),transparent_32%),linear-gradient(135deg,#f8fafc,#e2e8f0)] px-3 py-4 dark:bg-[linear-gradient(135deg,#020617,#111827)] sm:px-6 sm:py-6 xl:px-10">
       <div className="pointer-events-none absolute left-1/2 top-12 h-32 w-[28rem] -translate-x-1/2 rounded-full bg-white/60 blur-3xl" />
-      <div className="relative mx-auto grid min-h-[calc(100vh-3rem)] w-full max-w-7xl items-center gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(460px,1fr)] xl:grid-cols-[minmax(0,0.85fr)_minmax(500px,1fr)]">
-        <section className="hidden lg:block">
+      <div className="relative mx-auto grid min-h-[calc(100svh-2rem)] w-full max-w-6xl items-center gap-8 xl:grid-cols-[minmax(0,0.9fr)_minmax(390px,0.8fr)] 2xl:max-w-7xl 2xl:grid-cols-[minmax(0,0.85fr)_minmax(420px,0.75fr)]">
+        <section className="hidden xl:block">
           <p className="text-sm font-bold uppercase tracking-[0.22em] text-teal-600">Pritika Lahiri</p>
-          <h1 className="mt-4 max-w-xl text-6xl font-semibold leading-[0.95] tracking-tight text-slate-950 xl:text-7xl">
+          <h1 className="mt-4 max-w-xl text-6xl font-semibold leading-[0.95] tracking-tight text-slate-950 2xl:text-7xl">
             Pritika&apos;s Personal Portfolio
           </h1>
           <p className="mt-6 max-w-lg text-lg leading-8 text-slate-600">
@@ -64,8 +64,8 @@ export function PortfolioPhone() {
             })}
           </div>
         </section>
-        <section className="relative grid place-items-center">
-          <div className="pointer-events-none absolute inset-y-10 left-1/2 w-[min(70vw,720px)] -translate-x-1/2 rounded-full bg-gradient-to-br from-teal-200/45 via-indigo-200/35 to-fuchsia-200/35 blur-3xl" />
+        <section className="relative grid w-full place-items-center">
+          <div className="pointer-events-none absolute inset-y-10 left-1/2 w-[min(76vw,680px)] -translate-x-1/2 rounded-full bg-gradient-to-br from-teal-200/45 via-indigo-200/35 to-fuchsia-200/35 blur-3xl" />
           <div className="relative">
             <PhoneFrame theme={theme} accent={accent} booted={booted}>
               <HomeScreen onOpen={setActiveApp} animations={animations} />
