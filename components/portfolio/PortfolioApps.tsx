@@ -425,7 +425,7 @@ function PhotosApp() {
               exit={{ y: 24, scale: 0.96 }}
               className="flex max-h-[calc(100%-0.75rem)] w-full max-w-[28rem] flex-col overflow-hidden rounded-[1.7rem] border border-slate-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-950"
             >
-              <div className="flex items-center justify-between px-4 py-2.5">
+              <div className="flex shrink-0 items-center justify-between px-4 py-2.5">
                 <div>
                   <h4 className="font-semibold">{selected}</h4>
                   <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-300">
@@ -445,7 +445,7 @@ function PhotosApp() {
                 initial={{ opacity: 0.65, x: 18 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.25 }}
-                className="relative h-[min(42svh,22rem)] min-h-[14rem] overflow-hidden bg-slate-950"
+                className="relative min-h-[13rem] flex-1 overflow-hidden bg-slate-950"
               >
                 {activeGalleryPhotos[activeGalleryPhoto].companionSrc ? (
                   <div className="relative h-full bg-slate-950">
@@ -472,10 +472,6 @@ function PhotosApp() {
                     style={{ objectPosition: activeGalleryPhotos[activeGalleryPhoto].position ?? "center" }}
                   />
                 )}
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent p-4 text-white">
-                  <p className="text-sm font-bold">{activeGalleryPhotos[activeGalleryPhoto].title}</p>
-                  <p className="mt-1 text-xs leading-5 text-white/78">{activeGalleryPhotos[activeGalleryPhoto].caption}</p>
-                </div>
                 <button
                   type="button"
                   onClick={() => setActiveGalleryPhoto((index) => (index === 0 ? activeGalleryPhotos.length - 1 : index - 1))}
@@ -493,7 +489,11 @@ function PhotosApp() {
                   <ChevronRight className="h-5 w-5" />
                 </button>
               </motion.div>
-              <div className="phone-scroll flex gap-2 overflow-x-auto px-4 py-3">
+              <div className="shrink-0 bg-slate-950 px-4 py-3 text-white">
+                <p className="text-sm font-bold">{activeGalleryPhotos[activeGalleryPhoto].title}</p>
+                <p className="mt-1 text-xs leading-5 text-white/82">{activeGalleryPhotos[activeGalleryPhoto].caption}</p>
+              </div>
+              <div className="phone-scroll flex shrink-0 gap-2 overflow-x-auto px-4 py-3">
                 {activeGalleryPhotos.map((photo, index) => (
                   <button
                     key={photo.src}
