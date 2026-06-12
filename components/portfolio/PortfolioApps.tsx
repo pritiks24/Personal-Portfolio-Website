@@ -15,7 +15,7 @@ import {
   Trophy,
 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { experienceData, projectData, socialLinks, type AppId } from "./data";
 
 type PortfolioAppsProps = {
@@ -448,20 +448,18 @@ function PhotosApp() {
                 className="relative h-[min(42svh,22rem)] min-h-[14rem] overflow-hidden bg-slate-950"
               >
                 {activeGalleryPhotos[activeGalleryPhoto].companionSrc ? (
-                  <div className="flex h-full flex-col bg-slate-950">
-                    <div className="grid min-h-0 flex-[1.1] place-items-center bg-slate-950">
-                      <img
-                        src={activeGalleryPhotos[activeGalleryPhoto].src}
-                        alt={activeGalleryPhotos[activeGalleryPhoto].title}
-                        className="max-h-full w-full object-contain"
-                        style={{ objectPosition: activeGalleryPhotos[activeGalleryPhoto].position ?? "center" }}
-                      />
-                    </div>
-                    <div className="min-h-0 flex-1 overflow-hidden border-t border-white/10">
+                  <div className="relative h-full bg-slate-950">
+                    <img
+                      src={activeGalleryPhotos[activeGalleryPhoto].src}
+                      alt={activeGalleryPhotos[activeGalleryPhoto].title}
+                      className="h-full w-full object-contain"
+                      style={{ objectPosition: activeGalleryPhotos[activeGalleryPhoto].position ?? "center" }}
+                    />
+                    <div className="absolute right-3 top-3 w-28 overflow-hidden rounded-2xl border border-white/45 bg-white/10 shadow-2xl backdrop-blur md:w-36">
                       <img
                         src={activeGalleryPhotos[activeGalleryPhoto].companionSrc}
                         alt=""
-                        className="h-full w-full object-cover"
+                        className="aspect-[4/3] w-full object-cover"
                         style={{ objectPosition: "center" }}
                       />
                     </div>
@@ -843,6 +841,18 @@ function NotesApp() {
     ["Personal", allNotes.slice(4)],
   ] as const;
   const selectedNote = allNotes.find((note) => note.title === openNote);
+
+  useEffect(() => {
+    if (!selectedNote) return;
+
+    const handleAppBack = (event: Event) => {
+      event.preventDefault();
+      setOpenNote(null);
+    };
+
+    window.addEventListener("portfolio-app-back", handleAppBack);
+    return () => window.removeEventListener("portfolio-app-back", handleAppBack);
+  }, [selectedNote]);
 
   if (selectedNote) {
     return (

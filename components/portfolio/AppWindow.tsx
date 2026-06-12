@@ -16,6 +16,16 @@ type AppWindowProps = {
 
 export function AppWindow({ app, children, onClose, onBack, animations, theme }: AppWindowProps) {
   const Icon = app?.icon;
+  const handleBack = () => {
+    const backEvent = new CustomEvent("portfolio-app-back", {
+      cancelable: true,
+      detail: { appId: app?.id },
+    });
+
+    if (window.dispatchEvent(backEvent)) {
+      onBack();
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -35,7 +45,7 @@ export function AppWindow({ app, children, onClose, onBack, animations, theme }:
           <header className="portfolio-window-header sticky top-0 z-20 flex h-16 items-end justify-between bg-white/76 px-4 pb-3 pt-6 shadow-sm backdrop-blur-2xl dark:bg-slate-950/76">
             <button
               type="button"
-              onClick={onBack}
+              onClick={handleBack}
               className="grid h-8 w-8 place-items-center rounded-full bg-slate-100 text-slate-700 outline-none transition hover:bg-slate-200 focus-visible:ring-4 focus-visible:ring-[var(--phone-accent)]/25 dark:bg-slate-800 dark:text-slate-200"
               aria-label="Back to home screen"
             >
