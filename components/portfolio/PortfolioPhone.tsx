@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { BrainCircuit, Code2, GraduationCap, Sparkles } from "lucide-react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { RotatingHeadline } from "./RotatingHeadline";
+import { LifeOpening } from "./LifeOpening";
 import { AppWindow } from "./AppWindow";
 import { HomeScreen } from "./HomeScreen";
 import { PhoneFrame } from "./PhoneFrame";
@@ -13,15 +14,33 @@ export function PortfolioPhone() {
   const [activeApp, setActiveApp] = useState<AppId | null>(null);
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [accent, setAccent] = useState("#14b8a6");
+  const [wallpaper, setWallpaper] = useState("blue");
   const [animations, setAnimations] = useState(true);
   const [booted, setBooted] = useState(false);
-
-  const activeAppMeta = useMemo(() => apps.find((app) => app.id === activeApp), [activeApp]);
+  const [opening, setOpening] = useState(false);
+  const reducedMotion = useReducedMotion();
+  const [mobile, setMobile] = useState<boolean | null>(null);
+  const [phase, setPhase] = useState<"intro" | "moving" | "open">("intro");
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setBooted(true), 1550);
-    return () => window.clearTimeout(timer);
+    const media = window.matchMedia("(max-width: 760px)");
+    const update = () => { setMobile(media.matches); if (media.matches) setBooted(true); };
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
   }, []);
+
+  useEffect(() => {
+    if (phase !== "moving" || mobile) return;
+    const timer = window.setTimeout(() => { setPhase("open"); setOpening(true); }, reducedMotion ? 0 : 1450);
+    return () => window.clearTimeout(timer);
+  }, [phase, mobile, reducedMotion]);
+
+  const enterWorld = useCallback(() => { setActiveApp(null); setPhase(current => current === "intro" ? "moving" : current); }, []);
+  const returnToIntro = () => { setPhase("intro"); setActiveApp(null); setOpening(false); };
+
+
+  const activeAppMeta = useMemo(() => apps.find((app) => app.id === activeApp), [activeApp]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -35,41 +54,22 @@ export function PortfolioPhone() {
   }, []);
 
   return (
-    <main className="relative min-h-svh overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(20,184,166,0.22),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(99,102,241,0.2),transparent_32%),linear-gradient(135deg,#f8fafc,#e2e8f0)] px-3 py-4 dark:bg-[linear-gradient(135deg,#020617,#111827)] sm:px-6 sm:py-6 xl:px-10">
-      <div className="pointer-events-none absolute left-1/2 top-12 h-32 w-[28rem] -translate-x-1/2 rounded-full bg-white/60 blur-3xl" />
-      <div className="relative mx-auto grid min-h-[calc(100svh-2rem)] w-full max-w-6xl items-center gap-8 xl:grid-cols-[minmax(0,0.9fr)_minmax(390px,0.8fr)] 2xl:max-w-7xl 2xl:grid-cols-[minmax(0,0.85fr)_minmax(420px,0.75fr)]">
-        <section className="hidden xl:block">
-          <p className="text-sm font-bold uppercase tracking-[0.22em] text-teal-600">Pritika Lahiri</p>
-          <h1 className="mt-4 max-w-xl text-6xl font-semibold leading-[0.95] tracking-tight text-slate-950 2xl:text-7xl">
-            Pritika&apos;s Personal Portfolio
-          </h1>
-          <p className="mt-6 max-w-lg text-lg leading-8 text-slate-600">
-            Waterloo CS undergrad with an A.I. specialization building creative products across software, product, fintech, and machine learning. Click on the apps to learn more about me!
-          </p>
-          <div className="mt-8 grid max-w-xl grid-cols-2 gap-3">
-            {[
-              { label: "Waterloo CS", detail: "Undergraduate", icon: GraduationCap },
-              { label: "A.I.", detail: "Specialization", icon: BrainCircuit },
-              { label: "Software Developer", detail: "Currently @ CGI", icon: Sparkles },
-              { label: "Engineering", detail: "Full-stack projects", icon: Code2 },
-            ].map((item) => {
-              const Icon = item.icon;
-              return (
-                <div key={item.label} className="rounded-3xl border border-white/70 bg-white/62 p-4 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur-xl">
-                  <Icon className="h-5 w-5 text-teal-600" />
-                  <p className="mt-4 text-base font-semibold text-slate-950">{item.label}</p>
-                  <p className="mt-1 text-sm text-slate-500">{item.detail}</p>
-                </div>
-              );
-            })}
-          </div>
+    <main className={`portfolio-stage cinematic-stage ${phase !== "intro" ? "world-focused" : ""} ${reducedMotion ? "motion-reduced" : ""}`}>
+      <header className="site-masthead" inert={phase !== "intro"}><a href="#" aria-label="Pritika Lahiri home">pl.</a><span>A little window into my life</span><a href="mailto:pritika2404@gmail.com">Say hello ↗</a></header>
+      <div className="portfolio-layout">
+        <section className="portfolio-intro" inert={phase !== "intro"}>
+          <p className="eyebrow">Pritika Lahiri · Waterloo CS</p>
+          <RotatingHeadline active={mobile === false && phase === "intro"} reducedMotion={!!reducedMotion} onCycleComplete={enterWorld} />
+          <p className="intro-copy">Hi, I’m Pritika. I study computer science,<br />build things, and follow my curiosity.</p>
+          <button className="enter-button" onClick={enterWorld}>Open my world <span>↗</span></button>
+          <p className="intro-footnote">01 — A collection of things that make me, me.</p>
         </section>
-        <section className="relative grid w-full place-items-center">
-          <div className="pointer-events-none absolute inset-y-10 left-1/2 w-[min(76vw,680px)] -translate-x-1/2 rounded-full bg-gradient-to-br from-teal-200/45 via-indigo-200/35 to-fuchsia-200/35 blur-3xl" />
-          <div className="relative">
-            <PhoneFrame theme={theme} accent={accent} booted={booted}>
-              <HomeScreen onOpen={setActiveApp} animations={animations} />
-              <AppWindow app={activeAppMeta} onBack={() => setActiveApp(null)} onClose={() => setActiveApp(null)} animations={animations} theme={theme}>
+        <section className="phone-spotlight" aria-label="Interactive portfolio phone">
+          <div className="phone-presence">
+            <PhoneFrame theme={theme} accent={accent} booted={true}>
+              {(booted || mobile) && <HomeScreen wallpaper={wallpaper} onOpen={setActiveApp} animations={animations && !reducedMotion} />}
+              {mobile === false && <LifeOpening opening={opening} onOpen={enterWorld} onComplete={() => { setBooted(true); setOpening(false); }} reducedMotion={!!reducedMotion} />}
+              <AppWindow app={activeAppMeta} onBack={() => setActiveApp(null)} onClose={() => setActiveApp(null)} animations={animations && !reducedMotion} theme={theme}>
                 <AnimatePresence mode="wait">
                   {activeApp ? (
                     <motion.div
@@ -85,6 +85,8 @@ export function PortfolioPhone() {
                         setTheme={setTheme}
                         accent={accent}
                         setAccent={setAccent}
+                        wallpaper={wallpaper}
+                        setWallpaper={setWallpaper}
                         animations={animations}
                         setAnimations={setAnimations}
                       />
@@ -96,6 +98,7 @@ export function PortfolioPhone() {
           </div>
         </section>
       </div>
+      {phase !== "intro" && mobile === false && <button className="return-to-intro" onClick={returnToIntro}>← Back to introduction</button>}
       <p className="sr-only">Interactive phone-inspired personal portfolio. Use Tab to move between app icons and Escape to close an open app.</p>
     </main>
   );

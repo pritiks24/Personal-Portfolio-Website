@@ -31,22 +31,22 @@ export type PortfolioApp = {
   id: AppId;
   name: string;
   icon: LucideIcon;
-  gradient: string;
+  color: string;
   badge?: number;
   dock?: boolean;
 };
 
 export const apps: PortfolioApp[] = [
-  { id: "contact", name: "Contact Me", icon: UserRound, gradient: "from-rose-200 via-pink-300 to-stone-400", dock: true },
-  { id: "projects", name: "Projects", icon: Code2, gradient: "from-teal-600 via-teal-600 to-teal-600", dock: true },
-  { id: "experience", name: "Experience", icon: BriefcaseBusiness, gradient: "from-emerald-400 via-teal-500 to-cyan-600" },
-  { id: "skills", name: "Skills", icon: Sparkles, gradient: "from-amber-300 via-orange-400 to-rose-400" },
-  { id: "photos", name: "Photos", icon: Camera, gradient: "from-rose-400 via-pink-500 to-purple-500" },
-  { id: "music", name: "Music", icon: Music2, gradient: "from-lime-300 via-green-400 to-emerald-500" },
-  { id: "resume", name: "Resume", icon: FileText, gradient: "from-slate-200 via-slate-300 to-slate-500", dock: true },
-  { id: "notes", name: "Notes", icon: NotebookPen, gradient: "from-yellow-200 via-amber-300 to-orange-300" },
-  { id: "achievements", name: "Awards", icon: Award, gradient: "from-purple-400 via-indigo-500 to-blue-500" },
-  { id: "settings", name: "Settings", icon: Settings, gradient: "from-zinc-400 via-slate-500 to-zinc-700", dock: true },
+  { id: "contact", name: "Contact Me", icon: UserRound, color: "#a45b4e", dock: true },
+  { id: "projects", name: "Projects", icon: Code2, color: "#345dc5", dock: true },
+  { id: "experience", name: "Experience", icon: BriefcaseBusiness, color: "#42735c" },
+  { id: "skills", name: "Skills", icon: Sparkles, color: "#ba7834" },
+  { id: "photos", name: "Photos", icon: Camera, color: "#9b5479" },
+  { id: "music", name: "Music", icon: Music2, color: "#697747" },
+  { id: "resume", name: "Resume", icon: FileText, color: "#647482", dock: true },
+  { id: "notes", name: "Notes", icon: NotebookPen, color: "#b59135" },
+  { id: "achievements", name: "Awards", icon: Award, color: "#75609c" },
+  { id: "settings", name: "Settings", icon: Settings, color: "#555958", dock: true },
 ];
 
 export const socialLinks = [
@@ -57,6 +57,13 @@ export const socialLinks = [
 ];
 
 export const projectData = [
+  {
+    title: "ATLAS Blend",
+    category: "Web Dev",
+    description: "Discover art that feels like you, then blend your taste with a friend’s. ATLAS Blend brings personalised museum galleries, an AI curator, and a painting created from your shared tastes into one experience.",
+    stack: ["React", "TypeScript", "Three.js", "Node.js", "Gemini", "LangChain", "Supabase", "Typesense"],
+    links: [{ label: "Devpost", href: "https://devpost.com/software/atlas-blend" }],
+  },
   {
     title: "BulkBridge",
     category: "Mobile Apps",
@@ -100,7 +107,7 @@ export const projectData = [
 export const experienceData = [
   {
     role: "Software Developer Intern",
-    org: "CGI",
+    org: "TD",
     date: "2026",
     description: "Worked with the data engineering team on a TD project and contributed front-end development for an internal application.",
   },

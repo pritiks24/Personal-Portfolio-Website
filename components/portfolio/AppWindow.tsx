@@ -35,6 +35,7 @@ export function AppWindow({ app, children, onClose, onBack, animations, theme }:
           aria-modal="true"
           aria-label={`${app.name} app`}
           data-theme={theme}
+          data-app={app.id}
           style={theme === "dark" ? { background: "#020617", color: "#f8fafc" } : undefined}
           className={`${theme === "dark" ? "dark" : ""} portfolio-window absolute inset-0 z-40 overflow-hidden bg-slate-50 text-slate-950 dark:bg-slate-950 dark:text-slate-50`}
           initial={animations ? { opacity: 0, scale: 0.82, y: 90, borderRadius: 42 } : false}
@@ -47,17 +48,17 @@ export function AppWindow({ app, children, onClose, onBack, animations, theme }:
               type="button"
               onClick={handleBack}
               className="grid h-8 w-8 place-items-center rounded-full bg-slate-100 text-slate-700 outline-none transition hover:bg-slate-200 focus-visible:ring-4 focus-visible:ring-[var(--phone-accent)]/25 dark:bg-slate-800 dark:text-slate-200"
-              aria-label="Back to home screen"
+              aria-label="Back"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
             <div className="flex items-center gap-2">
-              <span className={`grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br ${app.gradient}`}>
+              <span style={{ backgroundColor: app.color }} className={`grid h-8 w-8 place-items-center rounded-xl `}>
                 {Icon ? <Icon className="h-4.5 w-4.5 text-white" /> : null}
               </span>
               <h2 className="text-sm font-semibold">{app.name}</h2>
             </div>
-            <div className="flex gap-1.5">
+            <div className="flex gap-1.5 app-window-controls">
               <button
                 type="button"
                 onClick={onBack}
