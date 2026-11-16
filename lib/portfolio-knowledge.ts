@@ -1,6 +1,7 @@
 import { projectData, experienceData } from "../components/portfolio/data";
 
 export const answers = [
+ {title:"Is she looking for internships?",terms:["internships","availability"],answer:"Yes! I’m open to internships, co-op roles, and project collaborations. If you have an opportunity in mind, I’d love to hear from you at pritika2404@gmail.com.",link:"mailto:pritika2404@gmail.com",label:"Get in touch about an opportunity"},
  {title:"Who is Pritika?",terms:["who","about","introduce","yourself","pritika","study","school","waterloo","education"],answer:"I’m Pritika Lahiri, a Computer Science undergraduate at the University of Waterloo with an AI specialization. I like building creative products, exploring AI, and making room for basketball and music along the way.",link:"/resume.pdf",label:"Read my résumé"},
  {title:"What has she built?",terms:["project","projects","built","build","software","app","apps","portfolio"],answer:"My projects range from shared grocery shopping with BulkBridge to hands-free filming with AutoVlog, accessible lectures with Lingo Lift, and art discovery with ATLAS Blend. I’m especially proud of ATLAS Blend: it learns your taste in art and blends it with a friend’s to create something personal.",link:"https://devpost.com/software/atlas-blend",label:"Explore ATLAS Blend"},
  {title:"What experience does she have?",terms:["experience","work","intern","internship","td","cgi","career","job","coop","co-op"],answer:"At TD, I worked with the data engineering team and contributed to the front end of an internal application. My coworkers were the best part of the internship, and winning first place at the TD Builders AI Hackathon was a highlight. I’ve also worked on AI research, teaching, and campus initiatives.",link:"/resume.pdf",label:"See my résumé"},
@@ -19,6 +20,7 @@ export function matchQuestion(question:string) {
  const exact=answers.find(answer=>normalise(answer.title)===query);
  if(exact)return exact;
  const aliases:Record<string,string[]>={
+  "Is she looking for internships?":["is she looking for an internship","are you looking for internships","are you looking for an internship","is pritika looking for internships","is she open to internships","is she available for internships","is she looking for co-op","is she looking for co op","is she open to collaboration"],
   "Who is Pritika?":["tell me about pritika","tell me about yourself","who are you","introduce yourself","where does she study","where do you study","what does she study","what do you study"],
   "What has she built?":["what are her projects","what are your projects","tell me about her projects","tell me about your projects","what have you built"],
   "What experience does she have?":["what is her work experience","what is your work experience","tell me about her experience","tell me about your experience","where has she worked","where have you worked","tell me about her td internship"],
