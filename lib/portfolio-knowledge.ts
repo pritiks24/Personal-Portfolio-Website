@@ -21,30 +21,43 @@ export const answers = [
  {"title": "What countries has she been to?", "terms": [], "answer": "I’ve visited Mexico, the USA, France, Italy, Belgium, Switzerland, the United Kingdom, and Cuba. Switzerland is probably my favourite country I’ve visited, especially for the views and gondola rides.", "link": "mailto:pritika2404@gmail.com", "label": "Talk travel with me"},
 
 ];
+// Normalize identity and harmless phrasing only. Keep factual qualifiers intact:
+// "favourite instrument" must never match "instruments she plays".
+export function normaliseQuestion(value:string) {
+ return value.toLowerCase().replace(/\b(pritika(?: lahiri)?)[’']s\b/g,"$1").replace(/[’']/g, "").replace(/[^a-z0-9]+/g," ").trim()
+  .replace(/^(?:hey |hi )?(?:please |can you |could you )?/, "")
+  .replace(/^(?:do you know |tell me |tell us )/, "")
+  .replace(/\b(?:pritika lahiri|pritika|she|her|hers|you|your|yours)\b/g,"person")
+  .replace(/\b(?:does|do)\b/g,"does")
+  .replace(/\b(?:has|have)\b/g,"has")
+  .replace(/\b(?:is|are)\b/g,"is")
+  .replace(/\btraveled\b/g,"travelled")
+  .replace(/\s+/g," ").trim();
+}
 export function matchQuestion(question:string) {
  // Only explicitly supported questions are answered. A topic word alone
  // cannot establish that the prepared response answers the actual question.
- const normalise=(value:string)=>value.toLowerCase().replace(/[’']/g, "").replace(/[^a-z0-9]+/g," ").trim();
+ const normalise=normaliseQuestion;
  const query=normalise(question);
  const exact=answers.find(answer=>normalise(answer.title)===query);
  if(exact)return exact;
  const aliases:Record<string,string[]>={
-  "When does she graduate?":["when do you graduate", "what year does she graduate", "what is her expected graduation", "when will she graduate"],
+  "When does she graduate?":["when do you graduate", "what year does she graduate", "what is her expected graduation", "when will she graduate", "when is her graduation", "what is her graduation year"],
   "What roles is she interested in?":["what jobs is she interested in", "what roles are you interested in", "is she interested in quant", "does she prefer remote work", "does she prefer in person work", "is she open to remote work"],
   "Why did she choose computer science?":["why computer science", "why did you choose computer science", "why does she like computer science"],
   "What was her TD hackathon project?":["what did she build at the td hackathon", "tell me about her td hackathon project"],
   "Which projects is she proudest of?":["what project is she most proud of", "what projects are you proud of", "what is her favourite project"],
   "What is she currently building?":["what are you currently building", "what is she working on", "what are you working on"],
   "Does she play basketball?":["does she play sports", "tell me about her basketball experience", "when did she start playing basketball", "do you play basketball"],
-  "What countries has she been to?":["what countries has she visited", "where has she travelled", "where has she traveled", "which countries has she been to", "what countries have you visited"],
-  "Is she looking for internships?":["is she looking for an internship","are you looking for internships","are you looking for an internship","is pritika looking for internships","is she open to internships","is she available for internships","is she looking for co-op","is she looking for co op","is she open to collaboration"],
+  "What countries has she been to?":["what countries has she visited", "where has she travelled", "where has she traveled", "which countries has she been to", "what countries have you visited", "which countries has she visited", "where has she been", "what countries did she visit"],
+  "Is she looking for internships?":["is she looking for an internship","are you looking for internships","are you looking for an internship","is pritika looking for internships","is she open to internships","is she available for internships","is she looking for co-op","is she looking for co op","is she open to collaboration", "is she seeking internships", "is she looking for work"],
   "Who is Pritika?":["tell me about pritika","tell me about yourself","who are you","introduce yourself","where does she study","where do you study","what does she study","what do you study"],
   "What has she built?":["what are her projects","what are your projects","tell me about her projects","tell me about your projects","what have you built"],
   "What experience does she have?":["what is her work experience","what is your work experience","tell me about her experience","tell me about your experience","where has she worked","where have you worked","tell me about her td internship"],
   "What does she do with AI?":["tell me about her ai research","tell me about your ai research","what ai research has she done","what ai research have you done"],
   "What are her technical skills?":["what are your technical skills","what programming languages does she know","what programming languages do you know","what is her tech stack","what is your tech stack"],
-  "What does she do outside tech?":["what are her hobbies","what are your hobbies","what does she do for fun","what do you do for fun","what are her interests"],
-  "Does she make music?":["tell me about her music","tell me about your music","what instruments does she play","what instruments do you play","does she sing","do you sing","where can i watch her covers"],
+  "What does she do outside tech?":["what are her hobbies","what are your hobbies","what does she do for fun","what do you do for fun","what are her interests", "what does she like to do in her free time"],
+  "Does she make music?":["tell me about her music","tell me about your music","what instruments does she play","what instruments do you play","does she sing","do you sing","where can i watch her covers", "what instruments she plays", "what instruments you play", "which instruments does she play", "what instruments can she play"],
   "How can I contact her?":["how can i contact pritika","how can i contact you","what is her email","what is your email","how can i connect with her","how can i reach you"],
   "Matcha or froyo?":["does she like matcha","do you like matcha","does she like froyo","do you like froyo"],
  };

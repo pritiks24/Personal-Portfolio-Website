@@ -2,7 +2,26 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUp, ArrowUpRight, BookOpen, ChevronLeft, ChevronRight, Compass, Copy, Globe, LockKeyhole, Search, SquareStack, X } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import { answers, matchQuestion, type PortfolioAnswer } from "../../lib/portfolio-knowledge";
+import { answers, matchQuestion, normaliseQuestion, type PortfolioAnswer } from "../../lib/portfolio-knowledge";
+type CachedResult={answer:PortfolioAnswer|null;mode:string;expires:number};
+const recentResults=new Map<string,CachedResult>();
+const CACHE_KEY="pritika-search-v2";
+function readCached(key:string) {
+ try {
+  if(!recentResults.size){
+   const saved=JSON.parse(sessionStorage.getItem(CACHE_KEY)||"[]") as [string,CachedResult][];
+   for(const [q,result] of saved)if(result.expires>Date.now())recentResults.set(q,result);
+  }
+ }catch{/* Storage may be disabled. In-memory caching still works. */}
+ const result=recentResults.get(key);
+ if(result&&result.expires>Date.now())return result;
+ recentResults.delete(key);
+}
+function cacheResult(key:string,data:{answer:PortfolioAnswer|null;mode:string}) {
+ if(recentResults.size>=50)recentResults.delete(recentResults.keys().next().value!);
+ recentResults.set(key,{...data,expires:Date.now()+30*60*1000});
+ try{sessionStorage.setItem(CACHE_KEY,JSON.stringify([...recentResults]));}catch{}
+}
 const suggestions=answers.map(a=>a.title);
 function GoogleWordmark(){return <span className="google-wordmark" aria-label="Google">{[..."Google"].map((letter,i)=><span key={i} style={{color:["#4285f4","#ea4335","#fbbc05","#4285f4","#34a853","#ea4335"][i]}}>{letter}</span>)}</span>;}
 export function GoogleSearchApp() {
@@ -14,11 +33,12 @@ export function GoogleSearchApp() {
  const [answer,setAnswer]=useState<PortfolioAnswer|null>(null);
  const [answerMode,setAnswerMode]=useState("prepared");
  const [searchError,setSearchError]=useState("");
- const resultsCache=useRef(new Map<string,{answer:PortfolioAnswer|null;mode:string}>());
  useEffect(()=>{
    if(!pending)return;
    const controller=new AbortController();
    let live=true;
+   let timedOut=false;
+   const deadline=window.setTimeout(()=>{timedOut=true;controller.abort();},6000);
    setInput("");setQuestion("");setAnswer(null);setSearchError("");
    let count=0;
    let finish:number|undefined;
@@ -32,16 +52,17 @@ export function GoogleSearchApp() {
      return data as {answer:PortfolioAnswer|null;mode:string};
    });
    void (async()=>{
-     try{const [data]=await Promise.all([response,typing]);if(!live)return;setAnswer(data.answer);setAnswerMode(data.mode);if(resultsCache.current.size>=50)resultsCache.current.delete(resultsCache.current.keys().next().value!);resultsCache.current.set(pending.toLowerCase(),data);}
-     catch(error){if(!live||controller.signal.aborted)return;setSearchError(error instanceof Error?error.message:"Search is temporarily unavailable. Please try again.");}
+     try{const [data]=await Promise.all([response,typing]);if(!live)return;setAnswer(data.answer);setAnswerMode(data.mode);cacheResult(normaliseQuestion(pending),data);}
+     catch(error){if(!live)return;setSearchError(timedOut?"This search is taking too long. Please try one of the questions below, or contact Pritika directly.":error instanceof Error?error.message:"Search is temporarily unavailable. Please try again.");}
+     window.clearTimeout(deadline);
      if(live){setInput(pending);setQuestion(pending);setPending(null);scroll.current?.scrollTo({top:0});}
    })();
-   return()=>{live=false;controller.abort();window.clearTimeout(finish);};
+   return()=>{live=false;controller.abort();window.clearTimeout(deadline);window.clearTimeout(finish);};
  },[pending,reduce]);
  const search=(q:string)=>{
    const value=q.trim().slice(0,300);if(!value)return;
    const prepared=matchQuestion(value);
-   const cached=resultsCache.current.get(value.toLowerCase());
+   const cached=readCached(normaliseQuestion(value));
    if(prepared||cached){setPending(null);setInput(value);setQuestion(value);setAnswer(prepared||cached!.answer);setAnswerMode(prepared?"prepared":cached!.mode);setSearchError("");}
    else setPending(value);
    scroll.current?.scrollTo({top:0});

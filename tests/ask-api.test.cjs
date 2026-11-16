@@ -92,3 +92,13 @@ test('new personal answers work instantly without inventing missing facts',async
  assert.equal(matchQuestion('What is her favourite instrument?'),null);
  assert.equal(matchQuestion('Which internship term is she available for?'),null);
 });
+test('safe wording variations stay local while missing qualifiers stay unknown',async()=>{
+ process.env.GEMINI_API_KEY='test-key';global.fetch=()=>{throw Error('Unexpected provider call')};
+ for(const q of ['Which countries has Pritika visited?','Please tell me what instruments you play','What are Pritika’s hobbies?','When does Pritika Lahiri graduate?']){
+  const {matchQuestion}=load('lib/portfolio-knowledge.ts');
+  assert.ok(matchQuestion(q),q);
+  assert.equal((await (await POST(request(q))).json()).mode,'prepared');
+ }
+ const {matchQuestion}=load('lib/portfolio-knowledge.ts');
+ for(const q of ['What is Pritika’s favourite colour?','Which instruments does she want to learn?','When did she visit France?','What year of university is she in?','Which countries does she hate?'])assert.equal(matchQuestion(q),null,q);
+});
