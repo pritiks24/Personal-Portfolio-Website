@@ -76,3 +76,19 @@ test('repeat paraphrases reuse the server cache without another Gemini call',asy
  const first=await (await POST(request(q))).json();const second=await (await POST(request(q))).json();
  assert.equal(calls,1);assert.deepEqual(first,second);assert.equal(first.mode,'gemini');
 });
+
+test('new personal answers work instantly without inventing missing facts',async()=>{
+ process.env.GEMINI_API_KEY='test-key';global.fetch=()=>{throw Error('Unexpected provider call')};
+ for(const [question,expected] of [
+  ['when does she graduate',/2030/],
+  ['what roles is she interested in',/quantitative finance/],
+  ['what countries has she been to',/Cuba/],
+  ['what was her TD hackathon project',/automatically generated video demos/],
+  ['does she play basketball',/grade 5/],
+  ['what instruments does she play',/trombone, saxophone, recorder/],
+  ['where has she worked',/Databricks/]
+ ]){const data=await (await POST(request(question))).json();assert.equal(data.mode,'prepared');assert.match(data.answer.answer,expected);}
+ const {matchQuestion}=load('lib/portfolio-knowledge.ts');
+ assert.equal(matchQuestion('What is her favourite instrument?'),null);
+ assert.equal(matchQuestion('Which internship term is she available for?'),null);
+});
