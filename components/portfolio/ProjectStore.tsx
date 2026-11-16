@@ -53,7 +53,8 @@ export function ProjectStore() {
  {tab==="Search"&&<input autoFocus className="store-search" aria-label="Search projects" placeholder="Projects, tools, ideas…" value={query} onChange={e=>setQuery(e.target.value)}/>}
  <div className="store-categories">{["All",...new Set(projectData.map(p=>p.category))].map(c=><button key={c} aria-pressed={category===c} onClick={()=>setCategory(c)}>{c}</button>)}</div>
  </>}
- <div className="store-list">{list.map(({p,i})=><article key={p.title}><button onClick={()=>show(i)} className="store-row-info">{icon(i)}<div><h4>{p.title}</h4><span>{p.category}</span></div></button><div>{open(i)}<small>Devpost</small></div></article>)}</div>
+ <p className="store-browse-hint"><ChevronRight size={15}/><span>Tap a project’s icon or name to see its demo and story.</span></p>
+ <div className="store-list">{list.map(({p,i})=><article key={p.title}><button onClick={()=>show(i)} className="store-row-info">{icon(i)}<div><h4>{p.title}</h4><span>{p.category}</span></div><ChevronRight className="store-row-chevron" size={17}/></button><div>{open(i)}<small>Devpost</small></div></article>)}</div>
  {!list.length&&<p className="store-empty">No projects found. Try a different search.</p>}
  </>}
  </motion.div></AnimatePresence>

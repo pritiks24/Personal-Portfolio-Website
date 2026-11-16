@@ -1084,3 +1084,10 @@ img {
 .iphone-dock { bottom:22px; padding:13px 10px 12px; }
 .home-dock-icons { column-gap:clamp(9px,3.5cqw,18px); }
 .iphone-page-dots { bottom:clamp(127px,21cqh,154px); }
+
+.store-browse-hint { display:flex; align-items:center; gap:7px; background:#edf4ff; color:#547ba7; padding:11px 12px; border-radius:11px; font-size:10px; line-height:1.5; margin:10px 0 6px; }
+.store-browse-hint svg { flex-shrink:0; }
+.store-row-chevron { margin-left:auto; margin-right:5px; flex-shrink:0; color:#abb9ca; transition:transform .2s,color .2s; }
+.store-row-info:hover .store-row-chevron { transform:translateX(3px); color:#1879e8; }
+.store-row-info:hover h4 { color:#1879e8; }
+[data-theme="dark"] .store-browse-hint { background:#263c59; color:#c1daf8; }
