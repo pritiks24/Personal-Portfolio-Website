@@ -38,7 +38,7 @@ export function GoogleSearchApp() {
    const controller=new AbortController();
    let live=true;
    let timedOut=false;
-   const deadline=window.setTimeout(()=>{timedOut=true;controller.abort();},6000);
+   const deadline=window.setTimeout(()=>{timedOut=true;controller.abort();},15000);
    setInput("");setQuestion("");setAnswer(null);setSearchError("");
    let count=0;
    let finish:number|undefined;
