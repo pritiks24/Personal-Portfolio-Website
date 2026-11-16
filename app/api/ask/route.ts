@@ -52,7 +52,10 @@ export async function POST(request: Request) {
         },
       }),
     });
-    if (!response.ok) throw new Error("Provider unavailable");
+    if (!response.ok) {
+      console.error("Portfolio search provider failure", { status: response.status, model });
+      return json({ error: "Search is temporarily unavailable. Please try again, or contact Pritika at pritika2404@gmail.com.", code: `PROVIDER_${response.status}` }, 503);
+    }
     const data = await response.json();
     const candidate = data.candidates?.[0];
     if (candidate?.finishReason !== "STOP") throw new Error("Incomplete response");
@@ -62,9 +65,11 @@ export async function POST(request: Request) {
     if (answerCache.size >= 256) answerCache.delete(answerCache.keys().next().value!);
     answerCache.set(cacheKey, { answer, expires: Date.now() + 60 * 60 * 1000 });
     return json({ answer, mode: "gemini" });
-  } catch {
+  } catch (error) {
+    const code = error instanceof Error && (error.name === "TimeoutError" || error.name === "AbortError") ? "PROVIDER_TIMEOUT" : "PROVIDER_RESPONSE_ERROR";
+    console.error("Portfolio search failure", { code, model });
     // Never send provider errors or credentials to the browser.
     if (prepared) return json({ answer: prepared, mode: "prepared" });
-    return json({ error: "Search is temporarily unavailable. Please try again, or contact Pritika at pritika2404@gmail.com." }, 503);
+    return json({ error: "Search is temporarily unavailable. Please try again, or contact Pritika at pritika2404@gmail.com.", code }, 503);
   }
 }
