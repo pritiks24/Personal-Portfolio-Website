@@ -1071,3 +1071,16 @@ img {
   .cinematic-stage .portfolio-intro .enter-button { margin:8px 0 0; }
   .cinematic-stage .portfolio-intro .intro-footnote { font-size:8px; margin-top:25px; }
 }
+
+/* Give the app rows their own space, with a clear gap above the dock. */
+.iphone-home { display:flex; flex-direction:column; padding-top:clamp(48px,9cqh,68px); padding-bottom:clamp(135px,24cqh,175px); }
+.home-connect-widget { flex-shrink:0; margin-bottom:clamp(20px,4cqh,32px); }
+.iphone-home .connect-widget { min-height:clamp(86px,16cqh,110px); padding:clamp(12px,2.4cqh,18px); }
+.home-app-grid { flex:1; min-height:0; grid-template-rows:repeat(3,minmax(0,1fr)); column-gap:clamp(12px,4.5cqw,22px); row-gap:clamp(14px,3cqh,24px); align-items:start; }
+.home-app-grid .iphone-app-button { gap:7px; }
+.iphone-home .iphone-app-tile { width:clamp(44px,min(16cqw,9cqh),72px); height:clamp(44px,min(16cqw,9cqh),72px); }
+.home-app-grid .iphone-app-label { font-size:clamp(10px,3cqw,13px); }
+.iphone-home .reminders-widget { width:100%; height:158px; max-height:100%; margin:0; padding:12px 10px; }
+.iphone-dock { bottom:22px; padding:13px 10px 12px; }
+.home-dock-icons { column-gap:clamp(9px,3.5cqw,18px); }
+.iphone-page-dots { bottom:clamp(127px,21cqh,154px); }
