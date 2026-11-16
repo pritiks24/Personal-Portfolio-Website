@@ -17,6 +17,8 @@ import {
 } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState, type ReactNode } from "react";
+import { GoogleSearchApp } from "./GoogleSearchApp";
+import { CampusMapsApp } from "./CampusMapsApp";
 import { ProjectStore } from "./ProjectStore";
 import { MusicLibrary, AchievementBooks } from "./CreativeApps";
 import { PhotoLibrary } from "./PhotoLibrary";
@@ -37,6 +39,8 @@ type PortfolioAppsProps = {
 
 export function PortfolioApps(props: PortfolioAppsProps) {
   const appMap: Record<AppId, ReactNode> = {
+    google: <GoogleSearchApp />,
+    maps: <CampusMapsApp />,
     projects: <ProjectsApp />,
     experience: <ExperienceApp />,
     skills: <SkillsApp />,
@@ -208,12 +212,12 @@ function PhotosApp() {
     },
   ];
   const workPhotos: GalleryPhoto[] = [
-    { src: "/images/life/td-coworkers.jpg", title: "The best part of TD", caption: "My TD internship coworkers — easily the best part of the internship!" },
+    { src: "/images/life/td-coworkers.jpg", title: "The best part of TD", caption: "My TD internship coworkers. Easily the best part of the internship!" },
     { src: "/images/life/td-builders-win.jpg", title: "First place at TD Builders", caption: "First place at the TD Builders AI Hackathon! A build, a team, and a win to remember." },
   ];
   const livePhotos: GalleryPhoto[] = [
     { src: "/images/life/daniel-caesar-live.jpg", title: "Daniel Caesar, live", caption: "I LOVE watching my favourite artists perform live. Daniel Caesar in concert was one for the books." },
-    { src: "/images/life/toronto-tempo.jpg", title: "Courtside energy", caption: "At a Toronto Tempo game! I love watching sports live — soccer, basketball, you name it. Nothing beats being there." },
+    { src: "/images/life/toronto-tempo.jpg", title: "Courtside energy", caption: "At a Toronto Tempo game! I love watching sports live: soccer, basketball, you name it. Nothing beats being there." },
     { src: "/images/life/fifa-match.jpg", title: "World Cup feelings", caption: "Watching a FIFA game! Not ready for Ronaldo’s last World Cup :(" },
   ];
   const favouritePhotos: GalleryPhoto[] = [

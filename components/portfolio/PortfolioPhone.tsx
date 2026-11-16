@@ -62,7 +62,7 @@ export function PortfolioPhone() {
           <RotatingHeadline active={mobile === false && phase === "intro"} reducedMotion={!!reducedMotion} onCycleComplete={enterWorld} />
           <p className="intro-copy">Hi, I’m Pritika. I study computer science,<br />build things, and follow my curiosity.</p>
           <button className="enter-button" onClick={enterWorld}>Open my world <span>↗</span></button>
-          <p className="intro-footnote">01 — A collection of things that make me, me.</p>
+          <p className="intro-footnote">01 · A collection of things that make me, me.</p>
         </section>
         <section className="phone-spotlight" aria-label="Interactive portfolio phone">
           <div className="phone-presence">

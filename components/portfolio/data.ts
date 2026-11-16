@@ -2,6 +2,8 @@ import {
   Award,
   BriefcaseBusiness,
   Camera,
+  Compass,
+  MapPin,
   Code2,
   FileText,
   GitFork,
@@ -10,6 +12,7 @@ import {
   Music2,
   NotebookPen,
   Settings,
+  Search,
   Sparkles,
   UserRound,
 } from "lucide-react";
@@ -25,7 +28,9 @@ export type AppId =
   | "contact"
   | "notes"
   | "achievements"
-  | "settings";
+  | "settings"
+  | "google"
+  | "maps";
 
 export type PortfolioApp = {
   id: AppId;
@@ -37,6 +42,8 @@ export type PortfolioApp = {
 };
 
 export const apps: PortfolioApp[] = [
+  { id: "google", name: "Google", icon: Search, color: "#4285f4" },
+  { id: "maps", name: "Maps", icon: MapPin, color: "#34a853" },
   { id: "contact", name: "Contact Me", icon: UserRound, color: "#a45b4e", dock: true },
   { id: "projects", name: "Projects", icon: Code2, color: "#345dc5", dock: true },
   { id: "experience", name: "Experience", icon: BriefcaseBusiness, color: "#42735c" },

@@ -14,7 +14,7 @@ type HomeScreenProps = {
 
 export function HomeScreen({ onOpen, animations, wallpaper }: HomeScreenProps) {
   const [completed, setCompleted] = useState<string[]>(["Go for froyo"]);
-  const reminders = ["Build something new", "Make time for music", "Go for froyo"];
+  const reminders = ["Build something new", "Make time for music", "Go for froyo", "Connect with you :)"];
   const homeApps = apps.filter((app) => !app.dock);
   const dockApps = apps.filter((app) => app.dock);
 
@@ -28,7 +28,7 @@ export function HomeScreen({ onOpen, animations, wallpaper }: HomeScreenProps) {
       >
         <button type="button" className="iphone-widget connect-widget" onClick={() => onOpen("contact")} aria-label="Want to connect? Open Contact to message Pritika">
           <span className="connect-widget-icon" aria-hidden="true"><MessageCircle size={24} fill="currentColor" strokeWidth={0}/></span>
-          <span className="connect-widget-copy"><strong>Want to connect?</strong><span>Message me — I’d love to talk!</span><span className="connect-widget-link">Say hello <span aria-hidden="true">↗</span></span></span>
+          <span className="connect-widget-copy"><strong>Want to connect?</strong><span>Message me. I’d love to talk!</span><span className="connect-widget-link">Say hello <span aria-hidden="true">↗</span></span></span>
         </button>
       </motion.div>
 
@@ -63,7 +63,7 @@ export function HomeScreen({ onOpen, animations, wallpaper }: HomeScreenProps) {
       <div className="iphone-page-dots" aria-hidden="true"><i/><i/></div>
       <div className="iphone-home-bar" aria-hidden="true"/>
       <div className="iphone-dock absolute inset-x-[clamp(0.75rem,5cqw,1.5rem)] bottom-[clamp(1rem,4cqh,1.25rem)] z-10 rounded-[2.2rem] bg-white/22 p-[clamp(0.55rem,2.8cqw,0.75rem)] shadow-[0_14px_45px_rgba(15,23,42,0.24)] backdrop-blur-2xl ring-1 ring-white/25">
-        <div className="grid grid-cols-4 gap-[clamp(0.45rem,2.8cqw,0.75rem)]">
+        <div className={`home-dock-icons ${dockApps.length > 4 ? "dock-extra-app" : ""}`} style={{gridTemplateColumns:`repeat(${dockApps.length},minmax(0,1fr))`}}>
           {dockApps.map((app) => (
             <AppIcon key={app.id} app={app} onOpen={onOpen} animations={animations} />
           ))}

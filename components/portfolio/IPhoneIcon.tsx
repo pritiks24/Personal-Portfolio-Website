@@ -2,8 +2,10 @@ import type { AppId } from "./data";
 
 const petals = ["#ffb62b", "#ff8a27", "#f25266", "#bc67b7", "#6e78c9", "#65b9df", "#60c48e", "#c4d94b"];
 export function IPhoneIcon({ id }: { id: AppId }) {
+  if (id === "google") return <img className="iphone-app-art" src="/images/google-app-icon.png" alt="" aria-hidden="true" />;
   if (id === "projects") return <img className="iphone-app-art" src="/images/app-store-icon.png" alt="" aria-hidden="true" />;
   return <svg className="iphone-app-art" viewBox="0 0 64 64" aria-hidden="true">
+    {id === "maps" && <><rect width="64" height="64" fill="#fff"/><path d="M32 7C20 7 12 16 12 27c0 14 20 32 20 32s20-18 20-32C52 16 44 7 32 7Z" fill="#34a853"/><path d="m17 13 27 27c5-5 8-10 8-13C52 16 44 7 32 7c-6 0-11 2-15 6" fill="#4285f4"/><path d="m17 13 10 10 11-15a22 22 0 0 0-21 5" fill="#ea4335"/><path d="M12 27c0 7 5 14 10 20l15-18-10-6-10-10c-3 4-5 9-5 14" fill="#fbbc05"/><circle cx="32" cy="26" r="8" fill="#fff"/></>}
     {id === "photos" && <><rect width="64" height="64" fill="#fff"/>{petals.map((fill,i)=><ellipse key={fill} cx="32" cy="20" rx="9" ry="15" fill={fill} fillOpacity=".83" transform={`rotate(${i*45} 32 32)`}/>)}<circle cx="32" cy="32" r="5" fill="#fac756"/></>}
     {id === "experience" && <><rect width="64" height="64" fill="#249cf1"/><circle cx="25" cy="24" r="12" fill="#ffdb42"/><path d="M21 46a10 10 0 1 1 0-20 13 13 0 0 1 24-1 10.5 10.5 0 1 1 2 21Z" fill="#fff"/></>}
     {id === "music" && <><rect width="64" height="64" fill="#fa355b"/><path d="M27 18v25c-7-2-13 1-13 6s9 6 13 2c2-2 2-5 2-8V26l18-4v16c-7-2-13 1-13 6s9 6 13 2c2-2 2-5 2-8V12Z" fill="white"/></>}
