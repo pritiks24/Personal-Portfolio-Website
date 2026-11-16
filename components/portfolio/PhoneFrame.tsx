@@ -9,12 +9,13 @@ type PhoneFrameProps = {
   theme: "light" | "dark";
   accent: string;
   booted: boolean;
+  stationary?: boolean;
 };
 
-export function PhoneFrame({ children, theme, accent, booted }: PhoneFrameProps) {
+export function PhoneFrame({ children, theme, accent, booted, stationary = false }: PhoneFrameProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 28, scale: 0.96 }}
+      initial={stationary ? false : { opacity: 0, y: 28, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       className={theme === "dark" ? "dark" : ""}

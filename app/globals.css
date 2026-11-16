@@ -1060,3 +1060,14 @@ img {
 .polaroid-caption { display:block; text-align:center; padding:12px 8px 15px; font:italic 12px Georgia,serif; color:#9b8d77; }
 .polaroid-photo .postcard-photo-count { bottom:52px; }
 .polaroid-photo > button { top:calc(50% - 20px); }
+
+/* Mobile keeps the opening story, while the device itself stays still. */
+@media (max-width:760px) {
+  .cinematic-stage .portfolio-intro { display:flex; position:fixed; inset:0; z-index:70; background:#f6f4ef; padding:30px 22px; flex-direction:column; align-items:center; justify-content:center; opacity:1; transition:opacity .45s ease; }
+  .cinematic-stage.world-focused .portfolio-intro { opacity:0; pointer-events:none; }
+  .cinematic-stage .portfolio-intro .rotating-headline { font-size:clamp(31px,8vw,54px); width:100%; }
+  .cinematic-stage .portfolio-intro .eyebrow { font-size:9px; }
+  .cinematic-stage .portfolio-intro .intro-copy { font-size:13px; }
+  .cinematic-stage .portfolio-intro .enter-button { margin:8px 0 0; }
+  .cinematic-stage .portfolio-intro .intro-footnote { font-size:8px; margin-top:25px; }
+}

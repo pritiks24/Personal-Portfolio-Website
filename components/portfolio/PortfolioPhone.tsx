@@ -24,15 +24,15 @@ export function PortfolioPhone() {
 
   useEffect(() => {
     const media = window.matchMedia("(max-width: 760px)");
-    const update = () => { setMobile(media.matches); if (media.matches) setBooted(true); };
+    const update = () => { setMobile(media.matches); };
     update();
     media.addEventListener("change", update);
     return () => media.removeEventListener("change", update);
   }, []);
 
   useEffect(() => {
-    if (phase !== "moving" || mobile) return;
-    const timer = window.setTimeout(() => { setPhase("open"); setOpening(true); }, reducedMotion ? 0 : 1450);
+    if (phase !== "moving" || mobile === null) return;
+    const timer = window.setTimeout(() => { setPhase("open"); setOpening(true); }, reducedMotion || mobile ? 0 : 1450);
     return () => window.clearTimeout(timer);
   }, [phase, mobile, reducedMotion]);
 
@@ -59,16 +59,16 @@ export function PortfolioPhone() {
       <div className="portfolio-layout">
         <section className="portfolio-intro" inert={phase !== "intro"}>
           <p className="eyebrow">Pritika Lahiri · Waterloo CS</p>
-          <RotatingHeadline active={mobile === false && phase === "intro"} reducedMotion={!!reducedMotion} onCycleComplete={enterWorld} />
+          <RotatingHeadline active={mobile !== null && phase === "intro"} reducedMotion={!!reducedMotion} onCycleComplete={enterWorld} />
           <p className="intro-copy">Hi, I’m Pritika. I study computer science,<br />build things, and follow my curiosity.</p>
           <button className="enter-button" onClick={enterWorld}>Open my world <span>↗</span></button>
           <p className="intro-footnote">01 · A collection of things that make me, me.</p>
         </section>
         <section className="phone-spotlight" aria-label="Interactive portfolio phone">
           <div className="phone-presence">
-            <PhoneFrame theme={theme} accent={accent} booted={true}>
-              {(booted || mobile) && <HomeScreen wallpaper={wallpaper} onOpen={setActiveApp} animations={animations && !reducedMotion} />}
-              {mobile === false && <LifeOpening opening={opening} onOpen={enterWorld} onComplete={() => { setBooted(true); setOpening(false); }} reducedMotion={!!reducedMotion} />}
+            <PhoneFrame stationary={mobile !== false} theme={theme} accent={accent} booted={true}>
+              {booted && <HomeScreen wallpaper={wallpaper} onOpen={setActiveApp} animations={animations && !reducedMotion} />}
+              {mobile !== null && <LifeOpening opening={opening} onOpen={enterWorld} onComplete={() => { setBooted(true); setOpening(false); }} reducedMotion={!!reducedMotion} />}
               <AppWindow app={activeAppMeta} onBack={() => setActiveApp(null)} onClose={() => setActiveApp(null)} animations={animations && !reducedMotion} theme={theme}>
                 <AnimatePresence mode="wait">
                   {activeApp ? (
