@@ -64,3 +64,15 @@ test('malformed model output fails safely',async()=>{
  process.env.GEMINI_API_KEY='test-key';global.fetch=async()=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:'not json'}]}}]});
  assert.equal((await POST(request('Some new question'))).status,503);
 });
+test('known questions bypass Gemini even when a key is configured',async()=>{
+ process.env.GEMINI_API_KEY='test-key';global.fetch=()=>{throw Error('Known question should not call Gemini')};
+ const result=await (await POST(request('where has she worked'))).json();
+ assert.equal(result.mode,'prepared');assert.match(result.answer.answer,/TD/);
+});
+test('repeat paraphrases reuse the server cache without another Gemini call',async()=>{
+ process.env.GEMINI_API_KEY='test-key';let calls=0;
+ global.fetch=async(_,opts)=>{calls++;const body=JSON.parse(opts.body);assert.equal(body.generationConfig.thinkingConfig.thinkingLevel,'minimal');return provider({supported:true,factIds:['travel']});};
+ const q='What destinations are on her travel list?';
+ const first=await (await POST(request(q))).json();const second=await (await POST(request(q))).json();
+ assert.equal(calls,1);assert.deepEqual(first,second);assert.equal(first.mode,'gemini');
+});

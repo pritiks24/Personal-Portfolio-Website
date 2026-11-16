@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUp, ArrowUpRight, BookOpen, ChevronLeft, ChevronRight, Compass, Copy, Globe, LockKeyhole, Search, SquareStack, X } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import { answers, type PortfolioAnswer } from "../../lib/portfolio-knowledge";
+import { answers, matchQuestion, type PortfolioAnswer } from "../../lib/portfolio-knowledge";
 const suggestions=answers.map(a=>a.title);
 function GoogleWordmark(){return <span className="google-wordmark" aria-label="Google">{[..."Google"].map((letter,i)=><span key={i} style={{color:["#4285f4","#ea4335","#fbbc05","#4285f4","#34a853","#ea4335"][i]}}>{letter}</span>)}</span>;}
 export function GoogleSearchApp() {
@@ -14,6 +14,7 @@ export function GoogleSearchApp() {
  const [answer,setAnswer]=useState<PortfolioAnswer|null>(null);
  const [answerMode,setAnswerMode]=useState("prepared");
  const [searchError,setSearchError]=useState("");
+ const resultsCache=useRef(new Map<string,{answer:PortfolioAnswer|null;mode:string}>());
  useEffect(()=>{
    if(!pending)return;
    const controller=new AbortController();
@@ -22,7 +23,7 @@ export function GoogleSearchApp() {
    let count=0;
    let finish:number|undefined;
    const typing=new Promise<void>(resolve=>{
-     const type=()=>{count=reduce?pending.length:count+1;setInput(pending.slice(0,count));if(count>=pending.length)resolve();else finish=window.setTimeout(type,26);};
+     const type=()=>{count=reduce?pending.length:Math.min(pending.length,count+Math.max(1,Math.ceil(pending.length/10)));setInput(pending.slice(0,count));if(count>=pending.length)resolve();else finish=window.setTimeout(type,18);};
      type();
    });
    const response=fetch("/api/ask",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({question:pending}),signal:controller.signal}).then(async res=>{
@@ -31,13 +32,20 @@ export function GoogleSearchApp() {
      return data as {answer:PortfolioAnswer|null;mode:string};
    });
    void (async()=>{
-     try{const [data]=await Promise.all([response,typing]);if(!live)return;setAnswer(data.answer);setAnswerMode(data.mode);}
+     try{const [data]=await Promise.all([response,typing]);if(!live)return;setAnswer(data.answer);setAnswerMode(data.mode);if(resultsCache.current.size>=50)resultsCache.current.delete(resultsCache.current.keys().next().value!);resultsCache.current.set(pending.toLowerCase(),data);}
      catch(error){if(!live||controller.signal.aborted)return;setSearchError(error instanceof Error?error.message:"Search is temporarily unavailable. Please try again.");}
      if(live){setInput(pending);setQuestion(pending);setPending(null);scroll.current?.scrollTo({top:0});}
    })();
    return()=>{live=false;controller.abort();window.clearTimeout(finish);};
  },[pending,reduce]);
- const search=(q:string)=>{const value=q.trim().slice(0,300);if(value){setPending(value);scroll.current?.scrollTo({top:0});}};
+ const search=(q:string)=>{
+   const value=q.trim().slice(0,300);if(!value)return;
+   const prepared=matchQuestion(value);
+   const cached=resultsCache.current.get(value.toLowerCase());
+   if(prepared||cached){setPending(null);setInput(value);setQuestion(value);setAnswer(prepared||cached!.answer);setAnswerMode(prepared?"prepared":cached!.mode);setSearchError("");}
+   else setPending(value);
+   scroll.current?.scrollTo({top:0});
+ };
  return <div className={`google-search-app ${question||pending?"google-has-query":""}`}>
  <div className="google-content phone-scroll" ref={scroll}>
  <header className="google-topline"><span>About Pritika</span><span className="google-avatar">PL</span></header>
