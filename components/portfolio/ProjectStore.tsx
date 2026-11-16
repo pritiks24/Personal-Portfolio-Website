@@ -46,6 +46,7 @@ export function ProjectStore() {
  <h4 className="store-more-heading">More to explore</h4><div className="store-related">{projectData.map((p,i)=>i!==selected&&<button key={p.title} onClick={()=>show(i)}>{icon(i)}<strong>{p.title}</strong><small>{p.category}</small></button>)}</div>
  </>:<>
  <header className="store-heading"><div><p>BUILT WITH CURIOSITY</p><h3>{tab==="Today"?"Today":tab==="Search"?"Search":"Apps"}</h3></div><span>PL</span></header>
+ <div className="store-browse-hint"><ChevronRight size={19}/><span><strong>Tap a project to explore</strong><small>See its demo and story here. OPEN takes you to Devpost.</small></span></div>
  {tab==="Today"?<>
  <button className="store-feature" onClick={()=>show(0)}><span className="store-editorial-label">ONE OF MY FAVOURITES</span><h4>Art is better<br/>when it’s shared.</h4><div className="store-atlas-art"><span/><span/><span/><Palette size={44} strokeWidth={1}/></div><div className="store-feature-footer">{icon(0)}<div><strong>ATLAS Blend</strong><small>Discover your taste in art</small></div><span className="store-feature-view">View <ChevronRight size={14}/></span></div></button>
  <div className="store-section-title"><h4>Made to make a difference</h4><ChevronRight size={18}/></div>
@@ -53,8 +54,7 @@ export function ProjectStore() {
  {tab==="Search"&&<input autoFocus className="store-search" aria-label="Search projects" placeholder="Projects, tools, ideas…" value={query} onChange={e=>setQuery(e.target.value)}/>}
  <div className="store-categories">{["All",...new Set(projectData.map(p=>p.category))].map(c=><button key={c} aria-pressed={category===c} onClick={()=>setCategory(c)}>{c}</button>)}</div>
  </>}
- <p className="store-browse-hint"><ChevronRight size={15}/><span>Tap a project’s icon or name to see its demo and story.</span></p>
- <div className="store-list">{list.map(({p,i})=><article key={p.title}><button onClick={()=>show(i)} className="store-row-info">{icon(i)}<div><h4>{p.title}</h4><span>{p.category}</span></div><ChevronRight className="store-row-chevron" size={17}/></button><div>{open(i)}<small>Devpost</small></div></article>)}</div>
+ <div className="store-list">{list.map(({p,i})=><article key={p.title}><button onClick={()=>show(i)} className="store-row-info">{icon(i)}<div><h4>{p.title}</h4><span>{p.category}</span><small className="store-row-detail-link">View demo & details</small></div><ChevronRight className="store-row-chevron" size={17}/></button><div>{open(i)}<small>Devpost</small></div></article>)}</div>
  {!list.length&&<p className="store-empty">No projects found. Try a different search.</p>}
  </>}
  </motion.div></AnimatePresence>

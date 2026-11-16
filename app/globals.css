@@ -1091,3 +1091,8 @@ img {
 .store-row-info:hover .store-row-chevron { transform:translateX(3px); color:#1879e8; }
 .store-row-info:hover h4 { color:#1879e8; }
 [data-theme="dark"] .store-browse-hint { background:#263c59; color:#c1daf8; }
+
+.store-browse-hint { margin:0 0 20px; padding:14px; background:#e8f1ff; color:#3974b5; border:1px solid #d3e4fb; }
+.store-browse-hint strong { display:block; font-size:12px; font-weight:650; }
+.store-browse-hint small { display:block; font-size:9px; color:#6c8cb1; margin-top:5px; line-height:1.6; }
+.store-row-detail-link { display:block; font-size:9px; color:#4386d5; margin-top:5px; }
